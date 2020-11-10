@@ -7,6 +7,7 @@ import sep3tier2.tier2.models.User;
 import sep3tier2.tier2.models.UserShortVersion;
 import sep3tier2.tier2.services.UserService;
 
+import java.io.File;
 import java.util.List;
 
 @RestController

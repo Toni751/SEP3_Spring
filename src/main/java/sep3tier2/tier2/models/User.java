@@ -1,5 +1,6 @@
 package sep3tier2.tier2.models;
 
+import java.io.IOException;
 import java.util.List;
 
 public abstract class User
@@ -25,6 +26,13 @@ public abstract class User
         this.description = description;
         this.posts = posts;
         this.likedPosts = likedPosts;
+
+        try
+        {
+            avatar = this.getClass().getClassLoader().getResourceAsStream("avatarimages/" + this.id + ".png").readAllBytes();
+            profileBackground = this.getClass().getClassLoader().getResourceAsStream("backgroundimages/" + this.id + ".jpg").readAllBytes();
+        }
+        catch (IOException e) { e.printStackTrace(); }
     }
 
     public int getId() {

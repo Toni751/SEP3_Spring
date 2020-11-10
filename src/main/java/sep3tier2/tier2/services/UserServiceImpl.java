@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import sep3tier2.tier2.models.*;
 import sep3tier2.tier2.networking.SocketClient;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
