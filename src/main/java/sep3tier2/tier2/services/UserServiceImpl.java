@@ -1,7 +1,9 @@
 package sep3tier2.tier2.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sep3tier2.tier2.models.User;
+import sep3tier2.tier2.networking.SocketClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService
 {
     private List<User> users;
+
+    @Autowired
+    private SocketClient socketClient;
 
     public UserServiceImpl() {
         users = new ArrayList<>();

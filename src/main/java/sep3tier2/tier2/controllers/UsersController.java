@@ -12,6 +12,7 @@ public class UsersController
     @Autowired
     UserService userService;
 
+    @CrossOrigin(origins = "*")
     @PostMapping
     public void addUser(@RequestBody User user)
     {

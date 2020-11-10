@@ -1,6 +1,6 @@
 package sep3tier2.tier2.models;
 
-public class User
+public abstract class User
 {
     private int id;
     private String email;
