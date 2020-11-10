@@ -1,8 +1,26 @@
 package sep3tier2.tier2.models;
 
-public class Administrator extends User
+public class Administrator
 {
-    public Administrator(int id, String email, String password, String accountType) {
-        super(id, email, password, accountType);
+    private int id;
+    private String email;
+    private String password;
+
+    public Administrator(int id, String email, String password) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

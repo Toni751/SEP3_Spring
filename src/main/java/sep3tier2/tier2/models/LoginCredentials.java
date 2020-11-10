@@ -1,11 +1,11 @@
 package sep3tier2.tier2.models;
 
-public class Login
+public class LoginCredentials
 {
     private String email;
     private String password;
 
-    public Login(String email, String password) {
+    public LoginCredentials(String email, String password) {
         this.email = email;
         this.password = password;
     }

@@ -2,7 +2,7 @@ package sep3tier2.tier2.networking;
 
 import com.google.gson.Gson;
 import org.springframework.stereotype.Component;
-import sep3tier2.tier2.models.Login;
+import sep3tier2.tier2.models.LoginCredentials;
 import sep3tier2.tier2.models.User;
 
 import java.io.IOException;
@@ -65,8 +65,8 @@ public class SocketClientImpl implements SocketClient
     @Override
     public void login(String email, String password)
     {
-        Login login = new Login(email, password);
-        String loginAsJson = gson.toJson(login);
+        LoginCredentials loginCredentials = new LoginCredentials(email, password);
+        String loginAsJson = gson.toJson(loginCredentials);
         System.out.println("Login as json " + loginAsJson);
         writeToServer(loginAsJson);
 

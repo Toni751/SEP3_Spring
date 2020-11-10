@@ -1,4 +1,4 @@
-package sep3tier2.tier2.controllers;
+package sep3tier2.tier2.controllers.websockets;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
