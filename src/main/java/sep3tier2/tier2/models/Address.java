@@ -2,16 +2,13 @@ package sep3tier2.tier2.models;
 
 public class Address
 {
+    private int id;
     private String street;
     private String number;
-    private String city;
-    private String postalCode;
 
-    public Address(String street, String number, String city, String postalCode) {
+    public Address(String street, String number) {
         this.street = street;
         this.number = number;
-        this.city = city;
-        this.postalCode = postalCode;
     }
 
     public String getStreet() {
@@ -22,11 +19,11 @@ public class Address
         return number;
     }
 
-    public String getCity() {
-        return city;
+    public int getId() {
+        return id;
     }
 
-    public String getPostalCode() {
-        return postalCode;
+    public void setId(int id) {
+        this.id = id;
     }
 }

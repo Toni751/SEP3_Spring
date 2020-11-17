@@ -29,22 +29,25 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public void addUser(User user) {
+    public boolean addUser(User user) {
         System.out.println("Adding user " + user.getEmail());
-        users.add(user);
+        return socketClient.addUser(user);
     }
 
     @Override
     public UserShortVersion login(String email, String password)
     {
-        for (User user : users) {
-            if (user.getEmail().equals(email)
-                    && user.getPassword().equals(password)) {
-                System.out.println("Logging in user " + user.getId());
-                return new UserShortVersion(user.getId(), user.getName(), user.getAccountType());
-            }
-        }
-        System.out.println("No user found for given login credentials");
+        if (email != null && password != null)
+            return socketClient.login(email, password);
+//        for (User user : users) {
+//            if (user.getEmail().equals(email)
+//                    && user.getPassword().equals(password)) {
+//                System.out.println("Logging in user " + user.getId());
+//                return new UserShortVersion(user.getId(), user.getName(), user.getAccountType());
+//            }
+//        }
+//        System.out.println("No user found for given login credentials");
+//        return null;
         return null;
     }
 
@@ -67,8 +70,8 @@ public class UserServiceImpl implements UserService
         List<Integer> postsSeed = new ArrayList<>();
         postsSeed.add(1); postsSeed.add(2); postsSeed.add(3);
 
-        User user = new RegularUser(0, "barry.allen@flash.com", "flash", "RegularUser",
-                "My name is Barry Allen and I am the fastest man on the Earth", postsSeed, likedPostsSeed, "Barry Allen", "Central City");
+        User user = new User(0, "barry.allen@flash.com", "flash", "RegularUser",
+                "My name is Barry Allen and I am the fastest man on the Earth", "Barry Allen", "Central City", new Address("yes", "1"));
         users.add(user);
     }
 
@@ -77,7 +80,7 @@ public class UserServiceImpl implements UserService
             return;
         UserShortVersion userShortVersion = new UserShortVersion(0, "Barry", "Allen");
         LocalDate now = LocalDate.now();
-        Post post = new Post(0, "My Post", userShortVersion, now);
+        Post post = new Post(0, "My Post", "Content of my post", userShortVersion, now);
         posts.add(post);
     }
 }

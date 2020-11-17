@@ -19,10 +19,10 @@ public class UsersController
 
     @CrossOrigin(origins = "*")
     @PostMapping
-    public void addUser(@RequestBody User user)
+    public boolean addUser(@RequestBody User user)
     {
         System.out.println("Controller adding user");
-        userService.addUser(user);
+        return userService.addUser(user);
     }
 
     @CrossOrigin(origins = "*")

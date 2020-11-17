@@ -1,9 +1,10 @@
 package sep3tier2.tier2.networking;
 
 import sep3tier2.tier2.models.User;
+import sep3tier2.tier2.models.UserShortVersion;
 
 public interface SocketClient
 {
-    void addUser(User user);
-    void login (String email, String password);
+    boolean addUser(User user);
+    UserShortVersion login (String email, String password);
 }

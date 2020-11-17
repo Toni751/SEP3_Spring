@@ -3,36 +3,34 @@ package sep3tier2.tier2.models;
 import java.io.IOException;
 import java.util.List;
 
-public abstract class User
+public class User
 {
     private int id;
     private String email;
     private String password;
-    private String accountType;
     private String name;
     private String description;
-    private List<Integer> posts; //ids of posts
-    private List<Integer> likedPosts; //ids of liked posts
-    private byte[] avatar;
-    private byte[] profileBackground;
+//    private List<Post> posts; //ids of posts
+//    private List<Integer> likedPosts; //ids of liked posts
+    private String city;
+    private Address address;
+//    private byte[] avatar;
+//    private byte[] profileBackground;
 
-    public User(int id, String email, String password, String accountType, String name, String description,
-                List<Integer> posts, List<Integer> likedPosts) {
+    public User(int id, String email, String password, String accountType, String name, String description, String city, Address address) {
         this.id = id;
         this.email = email;
         this.password = password;
-        this.accountType = accountType;
         this.name = name;
         this.description = description;
-        this.posts = posts;
-        this.likedPosts = likedPosts;
-
-        try
-        {
-            avatar = this.getClass().getClassLoader().getResourceAsStream("avatarimages/" + this.id + ".png").readAllBytes();
-            profileBackground = this.getClass().getClassLoader().getResourceAsStream("backgroundimages/" + this.id + ".jpg").readAllBytes();
-        }
-        catch (IOException e) { e.printStackTrace(); }
+        this.city = city;
+        this.address = address;
+//        try
+//        {
+//            avatar = this.getClass().getClassLoader().getResourceAsStream("avatarimages/" + this.id + ".png").readAllBytes();
+//            profileBackground = this.getClass().getClassLoader().getResourceAsStream("backgroundimages/" + this.id + ".jpg").readAllBytes();
+//        }
+//        catch (IOException e) { e.printStackTrace(); }
     }
 
     public int getId() {
@@ -47,31 +45,35 @@ public abstract class User
         return password;
     }
 
-    public String getAccountType() {
-        return accountType;
-    }
-
     public String getDescription() {
         return description;
     }
-
-    public List<Integer> getPosts() {
-        return posts;
-    }
-
-    public List<Integer> getLikedPosts() {
-        return likedPosts;
-    }
-
-    public byte[] getAvatar() {
-        return avatar;
-    }
-
-    public byte[] getProfileBackground() {
-        return profileBackground;
-    }
+//
+//    public List<Integer> getPosts() {
+//        return posts;
+//    }
+//
+//    public List<Integer> getLikedPosts() {
+//        return likedPosts;
+//    }
+//
+//    public byte[] getAvatar() {
+//        return avatar;
+//    }
+//
+//    public byte[] getProfileBackground() {
+//        return profileBackground;
+//    }
 
     public String getName() {
         return name;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public Address getAddress() {
+        return address;
     }
 }

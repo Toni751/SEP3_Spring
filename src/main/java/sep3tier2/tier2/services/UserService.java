@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UserService
 {
-    void addUser(User user);
+    boolean addUser(User user);
     UserShortVersion login (String email, String password);
     List<Post> getLatestPostsForUser(int id, int offset);
 

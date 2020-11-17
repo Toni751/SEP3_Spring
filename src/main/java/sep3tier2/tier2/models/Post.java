@@ -8,15 +8,17 @@ public class Post
 {
     private int id;
     private String title;
+    private String content;
     private UserShortVersion owner;
     private byte[] picture;
     private LocalDate timeStamp;
     private List<Comment> comments;
     private List<Integer> userIdsForLikes;
 
-    public Post(int id, String title, UserShortVersion owner, LocalDate timeStamp) {
+    public Post(int id, String title, String content, UserShortVersion owner, LocalDate timeStamp) {
         this.id = id;
         this.title = title;
+        this.content = content;
         this.owner = owner;
         this.timeStamp = timeStamp;
         comments = new ArrayList<>();
@@ -29,6 +31,10 @@ public class Post
 
     public String getTitle() {
         return title;
+    }
+
+    public String getContent() {
+        return content;
     }
 
     public UserShortVersion getOwner() {

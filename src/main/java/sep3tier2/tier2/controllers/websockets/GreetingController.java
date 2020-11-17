@@ -10,7 +10,6 @@ import sep3tier2.tier2.models.HelloMessage;
 @Controller
 public class GreetingController {
 
-
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
     public Greeting greeting(HelloMessage message) throws Exception {
