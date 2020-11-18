@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService
 
     @Override
     public User getUserById(int id) {
-        return users.get(id);
+        return socketClient.getUserById(id);
     }
 
 //    private void seedUsers() {

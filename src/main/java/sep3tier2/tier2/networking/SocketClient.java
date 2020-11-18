@@ -7,4 +7,6 @@ public interface SocketClient
 {
     boolean addUser(User user);
     String login (String email, String password);
+
+    User getUserById(int id);
 }

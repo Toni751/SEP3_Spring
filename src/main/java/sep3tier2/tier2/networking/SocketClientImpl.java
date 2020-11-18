@@ -79,6 +79,13 @@ public class SocketClientImpl implements SocketClient
         return response.getArgument().toString();
     }
 
+    @Override
+    public User getUserById(int id) {
+        Request request = new Request(ActionType.USER_GET_BY_ID, id);
+        Request userResponse = requestToServer(request);
+        return gson.fromJson(userResponse.getArgument().toString(), User.class);
+    }
+
     private Request requestToServer(Request request)
     {
         try {
@@ -91,18 +98,17 @@ public class SocketClientImpl implements SocketClient
             outputStream.write(toSendBytes);
             System.out.println("Sent request to the server " + toWrite);
 
-            byte[] readBytes = new byte[1024 * 1024 * 2];
+            byte[] readBytes = new byte[1024 * 64];
             int readResultLength = inputStream.read(readBytes);
-            //String received = new String(readBytes, 0, readResultLength);
-            //System.out.println("Received " + received + " " + received.length());
-            //String trimmed = received.trim();
-           // return gson.fromJson(trimmed, Request.class);
-            File avatar = new File("avatar.png");
-            FileOutputStream out = new FileOutputStream(avatar);
-            out.write(readBytes);
-            out.close();
-
-            System.out.println("DDDDDDDDDDDDDDDDDD "+readResultLength);
+            String received = new String(readBytes, 0, readResultLength);
+            System.out.println("Received " + received + " " + received.length());
+            return gson.fromJson(received, Request.class);
+//            File avatar = new File("avatar.png");
+//            FileOutputStream out = new FileOutputStream(avatar);
+//            out.write(readBytes);
+//            out.close();
+//
+//            System.out.println("DDDDDDDDDDDDDDDDDD "+readResultLength);
 
         } catch (IOException e) {
             e.printStackTrace();

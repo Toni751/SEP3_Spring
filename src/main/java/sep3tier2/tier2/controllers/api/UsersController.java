@@ -1,7 +1,9 @@
 package sep3tier2.tier2.controllers.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import sep3tier2.tier2.models.Post;
 import sep3tier2.tier2.models.User;
 import sep3tier2.tier2.models.UserShortVersion;
@@ -22,7 +24,10 @@ public class UsersController
     public boolean addUser(@RequestBody User user)
     {
         System.out.println("Controller adding user");
-        return userService.addUser(user);
+        boolean response = userService.addUser(user);
+        if (!response)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User could not be added");
+        return true;
     }
 
     @CrossOrigin(origins = "*")
