@@ -1,18 +1,20 @@
 package sep3tier2.tier2.networking;
 
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import org.springframework.stereotype.Component;
 import sep3tier2.tier2.models.*;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.net.Socket;
 
 @Component
 public class SocketClientImpl implements SocketClient
 {
     private Gson gson;
+    private JsonReader reader;
 //    private Socket socket;
 //    private InputStream inputStream;
 //    private OutputStream outputStream;
@@ -66,15 +68,15 @@ public class SocketClientImpl implements SocketClient
     }
 
     @Override
-    public UserShortVersion login(String email, String password)
+    public String login(String email, String password)
     {
         LoginCredentials loginCredentials = new LoginCredentials(email, password);
         Request request = new Request(ActionType.USER_LOGIN, loginCredentials);
         Request response = requestToServer(request);
         if (response == null)
             return null;
-
-        return gson.fromJson(response.getArgument().toString(), UserShortVersion.class);
+       // return gson.fromJson(response.getArgument().toString(), UserShortVersion.class);
+        return response.getArgument().toString();
     }
 
     private Request requestToServer(Request request)
@@ -89,11 +91,18 @@ public class SocketClientImpl implements SocketClient
             outputStream.write(toSendBytes);
             System.out.println("Sent request to the server " + toWrite);
 
-            byte[] readBytes = new byte[1024];
+            byte[] readBytes = new byte[1024 * 1024 * 2];
             int readResultLength = inputStream.read(readBytes);
-            String received = new String(readBytes, 0, readResultLength);
-            System.out.println("Received " + received + " " + received.length());
-            return gson.fromJson(received, Request.class);
+            //String received = new String(readBytes, 0, readResultLength);
+            //System.out.println("Received " + received + " " + received.length());
+            //String trimmed = received.trim();
+           // return gson.fromJson(trimmed, Request.class);
+            File avatar = new File("avatar.png");
+            FileOutputStream out = new FileOutputStream(avatar);
+            out.write(readBytes);
+            out.close();
+
+            System.out.println("DDDDDDDDDDDDDDDDDD "+readResultLength);
 
         } catch (IOException e) {
             e.printStackTrace();

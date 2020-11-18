@@ -27,7 +27,7 @@ public class UsersController
 
     @CrossOrigin(origins = "*")
     @GetMapping()
-    public @ResponseBody UserShortVersion loginUser(@RequestParam("email") String email,
+    public @ResponseBody String loginUser(@RequestParam("email") String email,
                                @RequestParam("password") String password)
     {
         System.out.println("Controller login user called with " + email + " " + password);
@@ -46,7 +46,7 @@ public class UsersController
     @GetMapping("/{id}")
     public @ResponseBody User getUserById(@PathVariable int id)
     {
-        System.out.println("Controller get user by id");
+        System.out.println("Controller get user by id = " + id);
         return userService.getUserById(id);
     }
 

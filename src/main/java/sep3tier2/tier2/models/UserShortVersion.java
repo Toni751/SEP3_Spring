@@ -11,19 +11,14 @@ public class UserShortVersion
     private int userId;
     private String userFullName;
     private String accountType;
-    private byte[] avatar;
+    private transient byte[] avatar;
 
-    public UserShortVersion(int userId, String userFullName, String accountType){
-        this.userId = userId;
-        this.userFullName = userFullName;
-        this.accountType = accountType;
-
-        try
-        {
-            avatar = this.getClass().getClassLoader().getResourceAsStream("avatarimages/" + userId + ".png").readAllBytes();
-        }
-        catch (IOException e) { e.printStackTrace(); }
-    }
+//
+//    public UserShortVersion(int userId, String userFullName, String accountType){
+//        this.userId = userId;
+//        this.userFullName = userFullName;
+//        this.accountType = accountType;
+//    }
 
     public int getUserId() {
         return userId;

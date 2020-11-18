@@ -24,8 +24,8 @@ public class UserServiceImpl implements UserService
     public UserServiceImpl() {
         users = new ArrayList<>();
         posts = new ArrayList<>();
-        seedUsers();
-        seedPosts();
+//        seedUsers();
+//        seedPosts();
     }
 
     @Override
@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public UserShortVersion login(String email, String password)
+    public String login(String email, String password)
     {
         if (email != null && password != null)
             return socketClient.login(email, password);
@@ -61,26 +61,26 @@ public class UserServiceImpl implements UserService
         return users.get(id);
     }
 
-    private void seedUsers() {
-        if (users.size() != 0)
-            return;
-        List<Integer> likedPostsSeed = new ArrayList<>();
-        likedPostsSeed.add(1); likedPostsSeed.add(2); likedPostsSeed.add(3);
+//    private void seedUsers() {
+//        if (users.size() != 0)
+//            return;
+//        List<Integer> likedPostsSeed = new ArrayList<>();
+//        likedPostsSeed.add(1); likedPostsSeed.add(2); likedPostsSeed.add(3);
+//
+//        List<Integer> postsSeed = new ArrayList<>();
+//        postsSeed.add(1); postsSeed.add(2); postsSeed.add(3);
+//
+//        User user = new User(0, "barry.allen@flash.com", "flash", "RegularUser",
+//                "My name is Barry Allen and I am the fastest man on the Earth", "Barry Allen", "Central City", new Address("yes", "1"));
+//        users.add(user);
+//    }
 
-        List<Integer> postsSeed = new ArrayList<>();
-        postsSeed.add(1); postsSeed.add(2); postsSeed.add(3);
-
-        User user = new User(0, "barry.allen@flash.com", "flash", "RegularUser",
-                "My name is Barry Allen and I am the fastest man on the Earth", "Barry Allen", "Central City", new Address("yes", "1"));
-        users.add(user);
-    }
-
-    private void seedPosts() {
-        if (posts.size() != 0)
-            return;
-        UserShortVersion userShortVersion = new UserShortVersion(0, "Barry", "Allen");
-        LocalDate now = LocalDate.now();
-        Post post = new Post(0, "My Post", "Content of my post", userShortVersion, now);
-        posts.add(post);
-    }
+//    private void seedPosts() {
+//        if (posts.size() != 0)
+//            return;
+//        UserShortVersion userShortVersion = new UserShortVersion(0, "Barry", "Allen");
+//        LocalDate now = LocalDate.now();
+//        Post post = new Post(0, "My Post", "Content of my post", userShortVersion, now);
+//        posts.add(post);
+//    }
 }

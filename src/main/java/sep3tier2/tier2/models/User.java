@@ -10,12 +10,12 @@ public class User
     private String password;
     private String name;
     private String description;
-//    private List<Post> posts; //ids of posts
-//    private List<Integer> likedPosts; //ids of liked posts
+    private List<Post> posts; //ids of posts
+    private List<Integer> likedPosts; //ids of liked posts
     private String city;
     private Address address;
-//    private byte[] avatar;
-//    private byte[] profileBackground;
+    private byte[] avatar;
+    private byte[] profileBackground;
 
     public User(int id, String email, String password, String accountType, String name, String description, String city, Address address) {
         this.id = id;
@@ -25,12 +25,12 @@ public class User
         this.description = description;
         this.city = city;
         this.address = address;
-//        try
-//        {
-//            avatar = this.getClass().getClassLoader().getResourceAsStream("avatarimages/" + this.id + ".png").readAllBytes();
-//            profileBackground = this.getClass().getClassLoader().getResourceAsStream("backgroundimages/" + this.id + ".jpg").readAllBytes();
-//        }
-//        catch (IOException e) { e.printStackTrace(); }
+        try
+        {
+            avatar = this.getClass().getClassLoader().getResourceAsStream("avatarimages/" + this.id + ".png").readAllBytes();
+            profileBackground = this.getClass().getClassLoader().getResourceAsStream("backgroundimages/" + this.id + ".jpg").readAllBytes();
+        }
+        catch (IOException e) { e.printStackTrace(); }
     }
 
     public int getId() {
@@ -57,13 +57,13 @@ public class User
 //        return likedPosts;
 //    }
 //
-//    public byte[] getAvatar() {
-//        return avatar;
-//    }
-//
-//    public byte[] getProfileBackground() {
-//        return profileBackground;
-//    }
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public byte[] getProfileBackground() {
+        return profileBackground;
+    }
 
     public String getName() {
         return name;
