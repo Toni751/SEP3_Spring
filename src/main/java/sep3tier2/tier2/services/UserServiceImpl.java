@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public String login(String email, String password)
+    public UserShortVersion login(String email, String password)
     {
         if (email != null && password != null)
             return socketClient.login(email, password);

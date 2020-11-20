@@ -9,7 +9,7 @@ import java.util.List;
 public interface UserService
 {
     boolean addUser(User user);
-    String login (String email, String password);
+    UserShortVersion login (String email, String password);
     List<Post> getLatestPostsForUser(int id, int offset);
 
     User getUserById(int id);

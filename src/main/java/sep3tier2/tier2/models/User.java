@@ -76,4 +76,22 @@ public class User
     public Address getAddress() {
         return address;
     }
+
+    public void clearProfileBackground()
+    {
+        profileBackground = null;
+    }
+
+    public void clearAvatar()
+    {
+        avatar = null;
+    }
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setProfileBackground(byte[] profileBackground) {
+        this.profileBackground = profileBackground;
+    }
 }

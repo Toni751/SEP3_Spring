@@ -36,4 +36,7 @@ public class UserShortVersion
         return avatar;
     }
 
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
+    }
 }

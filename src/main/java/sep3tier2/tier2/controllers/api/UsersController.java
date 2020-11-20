@@ -23,6 +23,8 @@ public class UsersController
     @PostMapping
     public boolean addUser(@RequestBody User user)
     {
+        System.out.println(this.hashCode());
+        System.out.println(this.toString());
         System.out.println("Controller adding user");
         boolean response = userService.addUser(user);
         if (!response)
@@ -32,7 +34,7 @@ public class UsersController
 
     @CrossOrigin(origins = "*")
     @GetMapping()
-    public @ResponseBody String loginUser(@RequestParam("email") String email,
+    public @ResponseBody UserShortVersion loginUser(@RequestParam("email") String email,
                                @RequestParam("password") String password)
     {
         System.out.println("Controller login user called with " + email + " " + password);
