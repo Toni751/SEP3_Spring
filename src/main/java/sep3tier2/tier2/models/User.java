@@ -79,12 +79,12 @@ public class User
 
     public void clearProfileBackground()
     {
-        profileBackground = null;
+        profileBackground = new byte[0];
     }
 
     public void clearAvatar()
     {
-        avatar = null;
+        avatar = new byte[0];
     }
 
     public void setAvatar(byte[] avatar) {
