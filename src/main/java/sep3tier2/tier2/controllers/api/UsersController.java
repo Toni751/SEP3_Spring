@@ -31,11 +31,12 @@ public class UsersController
         boolean response = userService.addUser(user);
         if (!response)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User could not be added");
+        System.out.println("Returning successful");
         return HttpStatus.CREATED;
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping()
+    @GetMapping("/login")
     public @ResponseBody UserShortVersion loginUser(@RequestParam("email") String email,
                                @RequestParam("password") String password)
     {

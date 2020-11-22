@@ -25,12 +25,12 @@ public class User
         this.description = description;
         this.city = city;
         this.address = address;
-        try
-        {
-            avatar = this.getClass().getClassLoader().getResourceAsStream("avatarimages/" + this.id + ".png").readAllBytes();
-            profileBackground = this.getClass().getClassLoader().getResourceAsStream("backgroundimages/" + this.id + ".jpg").readAllBytes();
-        }
-        catch (IOException e) { e.printStackTrace(); }
+//        try
+//        {
+//            avatar = this.getClass().getClassLoader().getResourceAsStream("avatarimages/" + this.id + ".png").readAllBytes();
+//            profileBackground = this.getClass().getClassLoader().getResourceAsStream("backgroundimages/" + this.id + ".jpg").readAllBytes();
+//        }
+//        catch (IOException e) { e.printStackTrace(); }
     }
 
     public int getId() {

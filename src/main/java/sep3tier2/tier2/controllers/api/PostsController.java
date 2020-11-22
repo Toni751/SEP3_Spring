@@ -89,18 +89,18 @@ public class PostsController
         }
     }
 
-    @CrossOrigin(origins = "*")
-    @GetMapping
-    public @ResponseBody List<Post> getPostsByUser(@RequestParam("byId") int byId, @RequestParam("offset") int offset)
-    {
-        System.out.println("Controller getting posts created by user " + byId);
-        try{
-            return postService.getLatestPostsByUser(byId, offset);
-        }
-        catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
-    }
+//    @CrossOrigin(origins = "*")
+//    @GetMapping
+//    public @ResponseBody List<Post> getPostsByUser(@RequestParam("byId") int byId, @RequestParam("offset") int offset)
+//    {
+//        System.out.println("Controller getting posts created by user " + byId);
+//        try{
+//            return postService.getLatestPostsByUser(byId, offset);
+//        }
+//        catch (Exception e){
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+//        }
+//    }
 
     @CrossOrigin(origins = "*")
     @PostMapping("/actions")
