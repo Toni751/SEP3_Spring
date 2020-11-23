@@ -9,4 +9,5 @@ public interface SocketAdmin
 {
     List<UserShortVersion> getUsers (int limit, int offset);
     List<PostShortVersion> getPosts (int limit, int offset);
+    int getTotalNumberOfModel(String model);
 }

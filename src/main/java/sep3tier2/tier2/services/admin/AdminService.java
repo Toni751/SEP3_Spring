@@ -9,4 +9,5 @@ public interface AdminService
 {
     List<UserShortVersion> getUsers (int limit, int offset);
     List<PostShortVersion> getPosts (int limit, int offset);
+    int getTotalNumberOfModel(String model) throws Exception;
 }

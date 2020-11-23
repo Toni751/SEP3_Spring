@@ -41,7 +41,10 @@ public class ServerConnectorImpl implements ServerConnector
                 System.out.println("Bytes size is " + informAboutImagesAsJson.getBytes().length);
 
                 outputStream.write(informAboutImagesAsJson.getBytes());
-                Thread.sleep(100);
+
+                String confirmationAboutImages = readFromStream(inputStream);
+                System.out.println("Confirmation: " + confirmationAboutImages);
+              //  Thread.sleep(100);
 
                 for (byte[] image : images) {
                     outputStream.write(image);
@@ -50,13 +53,10 @@ public class ServerConnectorImpl implements ServerConnector
             String requestAsJson = gson.toJson(request);
 
             System.out.println("********* json request: " + requestAsJson);
-            Thread.sleep(100);
+            //Thread.sleep(100);
             outputStream.write(requestAsJson.getBytes());
 
-            byte[] readBytes = new byte[65535];
-            int readResultLength = inputStream.read(readBytes);
-            String received = new String(readBytes, 0, readResultLength);
-            System.out.println("Received " + received + " " + received.length());
+            String received = readFromStream(inputStream);
             Request receivedResponse = gson.fromJson(received, Request.class);
 
             if (receivedResponse.getActionType().equals(ActionType.HAS_IMAGES)) {
@@ -74,10 +74,7 @@ public class ServerConnectorImpl implements ServerConnector
                     incomingImages.add(temp);
                 }
 
-                byte[] readResponseRequestBytes = new byte[65535];
-                int readRequestResultLength = inputStream.read(readResponseRequestBytes);
-                System.out.println("Read request length after receiving images " + readRequestResultLength);
-                String receivedRequestResponse = new String(readResponseRequestBytes, 0, readRequestResultLength);
+                String receivedRequestResponse = readFromStream(inputStream);
                 System.out.println("Received " + receivedRequestResponse + " " + receivedRequestResponse.length());
                 Request requestResponse = gson.fromJson(receivedRequestResponse, Request.class);
                 return new ActualRequest(requestResponse, incomingImages);
@@ -88,5 +85,13 @@ public class ServerConnectorImpl implements ServerConnector
             System.out.println("Sockets connection broke");
         }
         return null;
+    }
+
+    private String readFromStream(InputStream inputStream) throws IOException {
+        byte[] readBytes = new byte[65535];
+        int readResultLength = inputStream.read(readBytes);
+        String received = new String(readBytes, 0, readResultLength);
+        System.out.println("Received " + received + " " + received.length());
+        return received;
     }
 }

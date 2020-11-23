@@ -23,4 +23,13 @@ public class AdminServiceImpl implements AdminService
     public List<PostShortVersion> getPosts(int limit, int offset) {
         return socketAdmin.getPosts(limit, offset);
     }
+
+    @Override
+    public int getTotalNumberOfModel(String model) throws Exception{
+        if (!model.equals("users") && !model.equals("posts"))
+        {
+            throw new Exception("Invalid mode");
+        }
+        return socketAdmin.getTotalNumberOfModel(model);
+    }
 }
