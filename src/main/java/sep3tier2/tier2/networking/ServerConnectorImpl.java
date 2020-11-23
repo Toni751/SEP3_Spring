@@ -41,6 +41,7 @@ public class ServerConnectorImpl implements ServerConnector
                 System.out.println("Bytes size is " + informAboutImagesAsJson.getBytes().length);
 
                 outputStream.write(informAboutImagesAsJson.getBytes());
+                Thread.sleep(100);
 
                 for (byte[] image : images) {
                     outputStream.write(image);
@@ -49,7 +50,7 @@ public class ServerConnectorImpl implements ServerConnector
             String requestAsJson = gson.toJson(request);
 
             System.out.println("********* json request: " + requestAsJson);
-
+            Thread.sleep(100);
             outputStream.write(requestAsJson.getBytes());
 
             byte[] readBytes = new byte[65535];
