@@ -43,7 +43,10 @@ public class UsersController
         System.out.println(this.hashCode());
         System.out.println(this.toString());
         System.out.println("Controller login user called with " + email + " " + password);
-        return userService.login(email, password);
+        UserShortVersion user = userService.login(email, password);
+        if (user == null)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid credentials");
+        return user;
     }
 
     @CrossOrigin(origins = "*")
@@ -102,5 +105,13 @@ public class UsersController
         catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/friends/{id}")
+    public List<UserShortVersion> getFriendListForUser(@PathVariable int id)
+    {
+        System.out.println("Controller get friend list for user " + id);
+        return null;
     }
 }

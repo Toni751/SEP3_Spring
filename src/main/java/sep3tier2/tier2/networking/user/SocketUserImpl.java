@@ -44,6 +44,7 @@ public class SocketUserImpl implements SocketUser {
             return null;
         // return gson.fromJson(response.getArgument().toString(), UserShortVersion.class);
         UserShortVersion responseArgument = gson.fromJson(response.getRequest().getArgument().toString(), UserShortVersion.class);
+        System.out.println("Received logged in user");
         if (response.getImages() != null) {
             responseArgument.setAvatar(response.getImages().get(0));
         }

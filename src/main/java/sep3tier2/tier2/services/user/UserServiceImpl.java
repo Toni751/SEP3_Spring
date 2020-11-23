@@ -64,6 +64,7 @@ public class UserServiceImpl implements UserService {
             case USER_SHARE_TRAININGS:
             case USER_SHARE_DIETS:
             case USER_FOLLOW_PAGE:
+            case USER_REPORT:
                 if (!(userAction.getValue() instanceof Boolean))
                     throw new Exception("Sent request value has to be a boolean");
                 break;

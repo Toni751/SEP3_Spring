@@ -37,7 +37,8 @@ public class ServerConnectorImpl implements ServerConnector
                 Request informAboutImagesRequest = new Request(ActionType.HAS_IMAGES, imageSizes);
                 String informAboutImagesAsJson = gson.toJson(informAboutImagesRequest);
 
-                System.out.println("*******: " + informAboutImagesAsJson);
+                System.out.println("*******: " + informAboutImagesAsJson + " with size " + informAboutImagesAsJson.length());
+                System.out.println("Bytes size is " + informAboutImagesAsJson.getBytes().length);
 
                 outputStream.write(informAboutImagesAsJson.getBytes());
 
@@ -82,8 +83,8 @@ public class ServerConnectorImpl implements ServerConnector
             } else
                 return new ActualRequest(receivedResponse, null);
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Sockets connection broke");
         }
         return null;
     }

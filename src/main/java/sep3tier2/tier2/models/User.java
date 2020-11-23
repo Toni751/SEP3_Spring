@@ -16,6 +16,7 @@ public class User
     private Address address;
     private byte[] avatar;
     private byte[] profileBackground;
+    private boolean[] userStatus;
 
     public User(int id, String email, String password, String accountType, String name, String description, String city, Address address) {
         this.id = id;
@@ -79,12 +80,14 @@ public class User
 
     public void clearProfileBackground()
     {
-        profileBackground = new byte[0];
+        profileBackground = new byte[1];
+        profileBackground[0] = '1';
     }
 
     public void clearAvatar()
     {
-        avatar = new byte[0];
+        avatar = new byte[1];
+        avatar[0] = '1';
     }
 
     public void setAvatar(byte[] avatar) {
@@ -93,5 +96,9 @@ public class User
 
     public void setProfileBackground(byte[] profileBackground) {
         this.profileBackground = profileBackground;
+    }
+
+    public boolean[] getUserStatus() {
+        return userStatus;
     }
 }

@@ -14,6 +14,7 @@ public enum ActionType
     USER_SHARE_DIETS,
     USER_FOLLOW_PAGE,
     USER_RATE_PAGE,
+    USER_REPORT,
     POST_CREATE,
     POST_GET_BY_ID,
     POST_GET_FOR_USER,
