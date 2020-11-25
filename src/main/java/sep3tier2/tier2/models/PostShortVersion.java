@@ -9,7 +9,7 @@ public class PostShortVersion
     private String content;
     private UserShortVersion owner;
     private byte[] picture;
-    private LocalDate timeStamp;
+    private String timeStamp;
 
     public int getId() {
         return id;
@@ -31,7 +31,7 @@ public class PostShortVersion
         return picture;
     }
 
-    public LocalDate getTimeStamp() {
+    public String getTimeStamp() {
         return timeStamp;
     }
 

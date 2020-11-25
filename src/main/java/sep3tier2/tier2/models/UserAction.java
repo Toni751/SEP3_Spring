@@ -24,6 +24,17 @@ public class UserAction
         return value;
     }
 
+    @Override
+    public String toString() {
+        return "UserAction{" +
+                "senderId=" + senderId +
+                ", senderName='" + senderName + '\'' +
+                ", receiverId=" + receiverId +
+                ", actionType=" + actionType +
+                ", value=" + value +
+                '}';
+    }
+
     public String getSenderName() {
         return senderName;
     }

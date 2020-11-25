@@ -20,7 +20,9 @@ public class NotificationsController
     @MessageMapping("/notifications")
     public void sendNotification(@Payload UserAction userAction)
     {
-        messagingTemplate.convertAndSend("/queue/notifications/" + userAction.getReceiverId(), userAction);
+        System.out.println(userAction.toString());
+        messagingTemplate.convertAndSendToUser(Integer.toString(userAction.getReceiverId()),"/queue/notifications", userAction);
+        //messagingTemplate.convertAndSend("/queue/notifications/" + userAction.getReceiverId(), userAction);
         try {
             userService.postUserAction(userAction);
         } catch (Exception e) {
