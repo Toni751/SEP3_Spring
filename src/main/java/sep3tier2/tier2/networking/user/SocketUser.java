@@ -11,5 +11,6 @@ public interface SocketUser
     void editUser (User user) throws Exception;
     User getUserById(int senderId, int receiverId);
     void deleteUser(int id) throws Exception;
-    void postUserAction(UserAction userAction) throws Exception;
+    int postUserAction(UserAction userAction) throws Exception;
+    void deleteNotification(int notificationId) throws Exception;
 }

@@ -7,6 +7,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
+import sep3tier2.tier2.models.Notification;
 import sep3tier2.tier2.models.UserAction;
 import sep3tier2.tier2.services.user.UserService;
 
@@ -25,9 +26,10 @@ public class NotificationsController
     {
         System.out.println(userAction.toString());
         //messagingTemplate.convertAndSendToUser(String.valueOf(userAction.getSenderId()),"/topic/notifications", userAction);
-        messagingTemplate.convertAndSend("/topic/notifications/" + userAction.getReceiverId(), userAction);
         try {
-            userService.postUserAction(userAction);
+            int notificationId = userService.postUserAction(userAction);
+            Notification notification = new Notification(notificationId, userAction.getSenderId(), userAction.getSenderName(), userAction.getReceiverId(), userAction.getActionType());
+            messagingTemplate.convertAndSend("/topic/notifications/" + userAction.getReceiverId(), notification);
         } catch (Exception e) {
             System.out.println("Sending error message to clients");
            messagingTemplate.convertAndSend("/topic/errors/" + userAction.getSenderId(), userAction.getActionType() + "_ERROR");

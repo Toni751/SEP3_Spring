@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void postUserAction(UserAction userAction) throws Exception {
+    public int postUserAction(UserAction userAction) throws Exception {
 
         switch (userAction.getActionType()) {
             case USER_FRIEND_REQUEST_SEND:
@@ -80,8 +80,20 @@ public class UserServiceImpl implements UserService {
         }
 
         try {
-            socketUser.postUserAction(userAction);
+            return socketUser.postUserAction(userAction);
         } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public void deleteNotification(int notificationId) throws Exception {
+        if (notificationId < 1)
+            throw new Exception("Invalid delete notification id");
+        try {
+            socketUser.deleteNotification(notificationId);
+        }
+        catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }

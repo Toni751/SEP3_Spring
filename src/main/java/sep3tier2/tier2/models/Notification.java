@@ -1,0 +1,38 @@
+package sep3tier2.tier2.models;
+
+public class Notification
+{
+    private int id;
+    private int senderId;
+    private String senderName;
+    private int receiverId;
+    private ActionType actionType;
+
+    public Notification(int id, int senderId, String senderName, int receiverId, ActionType actionType) {
+        this.id = id;
+        this.senderId = senderId;
+        this.senderName = senderName;
+        this.receiverId = receiverId;
+        this.actionType = actionType;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getSenderId() {
+        return senderId;
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public int getReceiverId() {
+        return receiverId;
+    }
+
+    public ActionType getActionType() {
+        return actionType;
+    }
+}

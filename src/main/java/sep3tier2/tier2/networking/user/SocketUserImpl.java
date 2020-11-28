@@ -1,12 +1,11 @@
 package sep3tier2.tier2.networking.user;
 
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import sep3tier2.tier2.models.*;
 import sep3tier2.tier2.networking.ServerConnector;
-import sep3tier2.tier2.networking.ServerConnectorImpl;
+import sep3tier2.tier2.services.SocketsUtilMethods;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,6 @@ import java.util.List;
 @Component
 public class SocketUserImpl implements SocketUser {
     private Gson gson;
-    private JsonReader reader;
 
     @Autowired
     ServerConnector serverConnector;
@@ -26,13 +24,7 @@ public class SocketUserImpl implements SocketUser {
     @Override
     public boolean addUser(User user) {
         Request request = new Request(ActionType.USER_REGISTER, user);
-        ActualRequest registerResult = serverConnector.requestToServer(new ActualRequest(request, null));
-        if (registerResult == null)
-            return false;
-
-        Boolean bool = gson.fromJson(registerResult.getRequest().getArgument().toString(), Boolean.class);
-        System.out.println("Boolean result is " + bool);
-        return bool;
+        return SocketsUtilMethods.requestWithBooleanReturnTypeWithoutImages(request);
     }
 
     @Override
@@ -63,11 +55,7 @@ public class SocketUserImpl implements SocketUser {
             user.clearProfileBackground();
         }
         Request request = new Request(ActionType.USER_EDIT, user);
-        ActualRequest actualRequest = new ActualRequest(request, userImages);
-        ActualRequest response = serverConnector.requestToServer(actualRequest);
-
-        Boolean bool = gson.fromJson(response.getRequest().getArgument().toString(), Boolean.class);
-        System.out.println("Boolean edit result is " + bool);
+        boolean bool = SocketsUtilMethods.requestWithBooleanReturnTypeWithoutImages(request);
         if (!bool)
             throw new Exception("User could not be edited");
     }
@@ -93,24 +81,27 @@ public class SocketUserImpl implements SocketUser {
     @Override
     public void deleteUser(int id) throws Exception {
         Request request = new Request(ActionType.USER_DELETE, id);
-        ActualRequest deleteUserResponse = serverConnector.requestToServer(new ActualRequest(request, null));
-
-        Boolean bool = gson.fromJson(deleteUserResponse.getRequest().getArgument().toString(), Boolean.class);
-        System.out.println("Boolean delete result is " + bool);
+        boolean bool = SocketsUtilMethods.requestWithBooleanReturnTypeWithoutImages(request);
         if (!bool)
             throw new Exception("User could not be deleted");
-
     }
 
     @Override
-    public void postUserAction(UserAction userAction) throws Exception
+    public int postUserAction(UserAction userAction) throws Exception
     {
         Request request = new Request(userAction.getActionType(), userAction);
-        ActualRequest userActionResponse = serverConnector.requestToServer(new ActualRequest(request, null));
-
-        Boolean bool = gson.fromJson(userActionResponse.getRequest().getArgument().toString(), Boolean.class);
-        System.out.println("Boolean user action result is " + bool);
-        if (!bool)
+        int createdNotificationId = SocketsUtilMethods.requestWithIntegerReturnTypeWithoutImages(request);
+        if (createdNotificationId <= -1)
             throw new Exception("User action could not be performed");
+        //if there was no notification created for the given user action, it returns 0, and it returns -1 if an error occurred
+        return createdNotificationId;
+    }
+
+    @Override
+    public void deleteNotification(int notificationId) throws Exception {
+        Request request = new Request(ActionType.USER_DELETE_NOTIFICATION, notificationId);
+        boolean bool = SocketsUtilMethods.requestWithBooleanReturnTypeWithoutImages(request);
+        if (!bool)
+            throw new Exception("Notification could not be deleted");
     }
 }

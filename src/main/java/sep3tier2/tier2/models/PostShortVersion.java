@@ -10,6 +10,10 @@ public class PostShortVersion
     private UserShortVersion owner;
     private byte[] picture;
     private String timeStamp;
+    private int numberOfComments;
+    private int numberOfLikes;
+    private boolean hasImage;
+
 
     public int getId() {
         return id;
@@ -35,7 +39,21 @@ public class PostShortVersion
         return timeStamp;
     }
 
+    public int getNumberOfComments() {
+        return numberOfComments;
+    }
+
+    public int getNumberOfLikes() {
+        return numberOfLikes;
+    }
+    public boolean hasImage(){
+        return hasImage;
+    }
     public void setPicture(byte[] picture) {
         this.picture = picture;
+    }
+
+    public void clearPicture() {
+        picture = null;
     }
 }

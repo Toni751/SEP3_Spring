@@ -5,26 +5,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.server.ResponseStatusException;
-import sep3tier2.tier2.models.Post;
-import sep3tier2.tier2.models.User;
-import sep3tier2.tier2.models.UserAction;
-import sep3tier2.tier2.models.UserShortVersion;
+import sep3tier2.tier2.models.*;
 import sep3tier2.tier2.services.user.UserService;
 
 import java.util.List;
 
-@SessionScope
+//@SessionScope
 @RestController
 @RequestMapping("/users")
-public class UsersController
-{
+public class UsersController {
     @Autowired
     UserService userService;
 
     @CrossOrigin(origins = "*")
     @PostMapping
-    public HttpStatus addUser(@RequestBody User user)
-    {
+    public HttpStatus addUser(@RequestBody User user) {
         System.out.println(this.hashCode());
         System.out.println(this.toString());
         System.out.println("Controller adding user");
@@ -37,9 +32,9 @@ public class UsersController
 
     @CrossOrigin(origins = "*")
     @GetMapping("/login")
-    public @ResponseBody UserShortVersion loginUser(@RequestParam("email") String email,
-                               @RequestParam("password") String password)
-    {
+    public @ResponseBody
+    UserShortVersion loginUser(@RequestParam("email") String email,
+                               @RequestParam("password") String password) {
         System.out.println(this.hashCode());
         System.out.println(this.toString());
         System.out.println("Controller login user called with " + email + " " + password);
@@ -51,28 +46,24 @@ public class UsersController
 
     @CrossOrigin(origins = "*")
     @PutMapping("/{id}")
-    public HttpStatus editUser(@PathVariable int id, @RequestBody User user)
-    {
+    public HttpStatus editUser(@PathVariable int id, @RequestBody User user) {
         System.out.println("Controller editing user " + id);
-        try{
+        try {
             userService.editUser(user);
             return HttpStatus.OK;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
     @CrossOrigin(origins = "*")
     @DeleteMapping("/{id}")
-    public HttpStatus deleteUser(@PathVariable int id)
-    {
+    public HttpStatus deleteUser(@PathVariable int id) {
         System.out.println("Controller deleting user " + id);
-        try{
+        try {
             userService.deleteUser(id);
             return HttpStatus.OK;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
@@ -87,31 +78,47 @@ public class UsersController
 
     @CrossOrigin(origins = "*")
     @GetMapping()
-    public @ResponseBody User getUserById(@RequestParam("senderId") int senderId, @RequestParam("receiverId") int receiverId)
-    {
+    public @ResponseBody User getUserById(@RequestParam("senderId") int senderId, @RequestParam("receiverId") int receiverId) {
         System.out.println("Controller get user " + receiverId + " by " + senderId);
         return userService.getUserById(senderId, receiverId);
     }
 
     @CrossOrigin(origins = "*")
     @PostMapping("/actions")
-    public HttpStatus postUserAction(@RequestBody UserAction userAction)
-    {
+    public HttpStatus postUserAction(@RequestBody UserAction userAction) {
         System.out.println("Controller user action " + userAction.getActionType() + " with value " + userAction.getValue());
-        try{
+        try {
             userService.postUserAction(userAction);
             return HttpStatus.OK;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
     @CrossOrigin(origins = "*")
     @GetMapping("/friends/{id}")
-    public List<UserShortVersion> getFriendListForUser(@PathVariable int id)
-    {
+    public List<UserShortVersion> getFriendListForUser(@PathVariable int id) {
         System.out.println("Controller get friend list for user " + id);
+        return null;
+    }
+
+    @CrossOrigin(origins = "*")
+    @DeleteMapping("/notifications/{id}")
+    public HttpStatus markNotificationAsRead(@PathVariable int id)
+    {
+        System.out.println("Controller deleting notification " + id);
+        try {
+            userService.deleteNotification(id);
+            return HttpStatus.OK;
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/filter")
+    public List<UserShortVersion> getFilteredUserByName(@RequestParam("queryString") String queryString)
+    {
         return null;
     }
 }

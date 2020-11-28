@@ -1,18 +1,20 @@
 package sep3tier2.tier2.networking.post;
 
-import sep3tier2.tier2.models.Post;
-import sep3tier2.tier2.models.PostAction;
-import sep3tier2.tier2.models.PostShortVersion;
+import sep3tier2.tier2.models.*;
 
 import java.util.List;
 
 public interface SocketPost
 {
-    void addPost(PostShortVersion post) throws Exception;
+    int addPost(PostShortVersion post);
     Post getPostById(int postId) throws Exception;
-    void editPost (Post post) throws Exception;
+    void editPost (PostShortVersion post) throws Exception;
     void deletePost(int postId) throws Exception;
-    List<Post> getLatestPostsForUser(int id, int offset);
-    List<Post> getLatestPostsByUser(int id, int offset);
-    void postPostAction(PostAction postAction) throws Exception;
+    List<PostShortVersion> getLatestPostsForUser(int id, int offset);
+    List<PostShortVersion> getLatestPostsByUser(int id, int offset);
+    int postPostAction(PostAction postAction) throws Exception;
+    int addCommentToPost(CommentForPost comment) throws Exception;
+    void deleteComment(int commentId) throws Exception;
+    List<Comment> getAllCommentsForPost(int postId) throws Exception;
+    List<UserShortVersion> getAllLikesForPost(int postId) throws Exception;
 }
