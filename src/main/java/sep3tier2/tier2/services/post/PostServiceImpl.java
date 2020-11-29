@@ -61,7 +61,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostShortVersion> getLatestPostsByUser(int id, int offset) throws Exception {
+    public List<Integer> getLatestPostsByUser(int id, int offset) throws Exception {
         if (id < 0 || offset < 0)
             throw new Exception("Invalid request parameters");
         return socketPost.getLatestPostsByUser(id, offset);

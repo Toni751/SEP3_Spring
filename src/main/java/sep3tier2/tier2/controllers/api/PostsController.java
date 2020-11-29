@@ -77,7 +77,7 @@ public class PostsController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/profile")
-    public @ResponseBody List<PostShortVersion> getPostsByUser(@RequestParam("byId") int byId, @RequestParam("offset") int offset) {
+    public @ResponseBody List<Integer> getPostsByUser(@RequestParam("byId") int byId, @RequestParam("offset") int offset) {
         System.out.println("Controller getting posts created by user " + byId);
         try {
             return postService.getLatestPostsByUser(byId, offset);

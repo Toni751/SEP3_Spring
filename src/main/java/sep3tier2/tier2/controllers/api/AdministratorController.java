@@ -26,7 +26,7 @@ public class AdministratorController {
     }
 
     @GetMapping("/posts")
-    public @ResponseBody List<PostShortVersion> getReportedPosts(@RequestParam("limit") int limit, @RequestParam("offset") int offset) {
+    public @ResponseBody List<Integer> getReportedPosts(@RequestParam("limit") int limit, @RequestParam("offset") int offset) {
         System.out.println("Admin Controller getting " + limit + " reported posts with offset " + offset);
         return adminService.getPosts(limit, offset);
     }

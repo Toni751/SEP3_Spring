@@ -20,7 +20,7 @@ public class AdminServiceImpl implements AdminService
     }
 
     @Override
-    public List<PostShortVersion> getPosts(int limit, int offset) {
+    public List<Integer> getPosts(int limit, int offset) {
         return socketAdmin.getPosts(limit, offset);
     }
 

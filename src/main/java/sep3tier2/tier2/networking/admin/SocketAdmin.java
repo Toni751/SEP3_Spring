@@ -8,6 +8,6 @@ import java.util.List;
 public interface SocketAdmin
 {
     List<UserShortVersion> getUsers (int limit, int offset);
-    List<PostShortVersion> getPosts (int limit, int offset);
+    List<Integer> getPosts (int limit, int offset);
     int getTotalNumberOfModel(String model);
 }

@@ -11,7 +11,7 @@ public interface SocketPost
     void editPost (PostShortVersion post) throws Exception;
     void deletePost(int postId) throws Exception;
     List<PostShortVersion> getLatestPostsForUser(int id, int offset);
-    List<PostShortVersion> getLatestPostsByUser(int id, int offset);
+    List<Integer> getLatestPostsByUser(int id, int offset);
     int postPostAction(PostAction postAction) throws Exception;
     int addCommentToPost(CommentForPost comment) throws Exception;
     void deleteComment(int commentId) throws Exception;

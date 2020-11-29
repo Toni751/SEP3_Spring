@@ -97,15 +97,16 @@ public class SocketPostImpl implements SocketPost
 
     @Override
     public List<PostShortVersion> getLatestPostsForUser(int id, int offset) {
-        List<Integer> integers = new ArrayList<>();
-        integers.add(id);
-        integers.add(offset);
-        Request request = new Request(ActionType.POST_GET_FOR_USER, integers);
-        return socketsUtilMethods.getPosts(request);
+//        List<Integer> integers = new ArrayList<>();
+//        integers.add(id);
+//        integers.add(offset);
+//        Request request = new Request(ActionType.POST_GET_FOR_USER, integers);
+//        return socketsUtilMethods.getPosts(request);
+        return null;
     }
 
     @Override
-    public List<PostShortVersion> getLatestPostsByUser(int id, int offset) {
+    public List<Integer> getLatestPostsByUser(int id, int offset) {
         List<Integer> integers = new ArrayList<>();
         integers.add(id);
         integers.add(offset);

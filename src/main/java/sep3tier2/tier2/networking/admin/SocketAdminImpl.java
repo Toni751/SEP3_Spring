@@ -47,7 +47,7 @@ public class SocketAdminImpl implements SocketAdmin
     }
 
     @Override
-    public List<PostShortVersion> getPosts(int limit, int offset) {
+    public List<Integer> getPosts(int limit, int offset) {
         List<Integer> paginationInts = new ArrayList<>();
         paginationInts.add(limit);
         paginationInts.add(offset);
