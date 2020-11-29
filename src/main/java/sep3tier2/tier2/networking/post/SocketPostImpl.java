@@ -20,6 +20,9 @@ public class SocketPostImpl implements SocketPost
     @Autowired
     ServerConnector serverConnector;
 
+    @Autowired
+    SocketsUtilMethods socketsUtilMethods;
+
     public SocketPostImpl() {
         gson = new Gson();
     }
@@ -50,6 +53,9 @@ public class SocketPostImpl implements SocketPost
         Post post = gson.fromJson(response.getRequest().getArgument().toString(), Post.class);
         if(response.getImages() != null)
         {
+            post.getOwner().setAvatar(response.getImages().get(0));
+            response.getImages().remove(0);
+
             if(post.hasImage())
             {
                 post.setPicture(response.getImages().get(0));
@@ -84,7 +90,7 @@ public class SocketPostImpl implements SocketPost
     @Override
     public void deletePost(int postId) throws Exception {
         Request request = new Request(ActionType.POST_DELETE, postId);
-        boolean bool = SocketsUtilMethods.requestWithBooleanReturnTypeWithoutImages(request);
+        boolean bool = socketsUtilMethods.requestWithBooleanReturnTypeWithoutImages(request);
         if (!bool)
             throw new Exception("Post could not be deleted");
     }
@@ -95,7 +101,7 @@ public class SocketPostImpl implements SocketPost
         integers.add(id);
         integers.add(offset);
         Request request = new Request(ActionType.POST_GET_FOR_USER, integers);
-        return SocketsUtilMethods.getPosts(request);
+        return socketsUtilMethods.getPosts(request);
     }
 
     @Override
@@ -104,13 +110,13 @@ public class SocketPostImpl implements SocketPost
         integers.add(id);
         integers.add(offset);
         Request request = new Request(ActionType.POST_GET_BY_USER, integers);
-        return SocketsUtilMethods.getPosts(request);
+        return socketsUtilMethods.getPosts(request);
     }
 
     @Override
     public int postPostAction(PostAction postAction) throws Exception {
         Request request = new Request(postAction.getActionType(), postAction);
-        int createdNotificationId = SocketsUtilMethods.requestWithIntegerReturnTypeWithoutImages(request);
+        int createdNotificationId = socketsUtilMethods.requestWithIntegerReturnTypeWithoutImages(request);
         if (createdNotificationId <= -1)
             throw new Exception("Post action could not be performed");
         //if there was no notification created for the given post action, it returns 0, and it returns -1 if an error occurred
@@ -120,7 +126,7 @@ public class SocketPostImpl implements SocketPost
     @Override
     public int addCommentToPost(CommentForPost comment) throws Exception {
         Request request = new Request(ActionType.POST_ADD_COMMENT, comment);
-        int createdCommentId = SocketsUtilMethods.requestWithIntegerReturnTypeWithoutImages(request);
+        int createdCommentId = socketsUtilMethods.requestWithIntegerReturnTypeWithoutImages(request);
         if (createdCommentId <= 0)
             throw new Exception("Comment could not be added");
         return createdCommentId;
@@ -129,7 +135,7 @@ public class SocketPostImpl implements SocketPost
     @Override
     public void deleteComment(int commentId) throws Exception {
         Request request = new Request(ActionType.POST_DELETE_COMMENT, commentId);
-        boolean bool = SocketsUtilMethods.requestWithBooleanReturnTypeWithoutImages(request);
+        boolean bool = socketsUtilMethods.requestWithBooleanReturnTypeWithoutImages(request);
         if (!bool)
             throw new Exception("Comment could not be deleted");
     }

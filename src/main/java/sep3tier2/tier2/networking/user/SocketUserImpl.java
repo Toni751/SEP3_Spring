@@ -17,6 +17,9 @@ public class SocketUserImpl implements SocketUser {
     @Autowired
     ServerConnector serverConnector;
 
+    @Autowired
+    SocketsUtilMethods socketsUtilMethods;
+
     public SocketUserImpl() {
         gson = new Gson();
     }
@@ -24,7 +27,7 @@ public class SocketUserImpl implements SocketUser {
     @Override
     public boolean addUser(User user) {
         Request request = new Request(ActionType.USER_REGISTER, user);
-        return SocketsUtilMethods.requestWithBooleanReturnTypeWithoutImages(request);
+        return socketsUtilMethods.requestWithBooleanReturnTypeWithoutImages(request);
     }
 
     @Override
@@ -55,7 +58,7 @@ public class SocketUserImpl implements SocketUser {
             user.clearProfileBackground();
         }
         Request request = new Request(ActionType.USER_EDIT, user);
-        boolean bool = SocketsUtilMethods.requestWithBooleanReturnTypeWithoutImages(request);
+        boolean bool = socketsUtilMethods.requestWithBooleanReturnTypeWithoutImages(request);
         if (!bool)
             throw new Exception("User could not be edited");
     }
@@ -81,7 +84,7 @@ public class SocketUserImpl implements SocketUser {
     @Override
     public void deleteUser(int id) throws Exception {
         Request request = new Request(ActionType.USER_DELETE, id);
-        boolean bool = SocketsUtilMethods.requestWithBooleanReturnTypeWithoutImages(request);
+        boolean bool = socketsUtilMethods.requestWithBooleanReturnTypeWithoutImages(request);
         if (!bool)
             throw new Exception("User could not be deleted");
     }
@@ -90,7 +93,7 @@ public class SocketUserImpl implements SocketUser {
     public int postUserAction(UserAction userAction) throws Exception
     {
         Request request = new Request(userAction.getActionType(), userAction);
-        int createdNotificationId = SocketsUtilMethods.requestWithIntegerReturnTypeWithoutImages(request);
+        int createdNotificationId = socketsUtilMethods.requestWithIntegerReturnTypeWithoutImages(request);
         if (createdNotificationId <= -1)
             throw new Exception("User action could not be performed");
         //if there was no notification created for the given user action, it returns 0, and it returns -1 if an error occurred
@@ -100,7 +103,7 @@ public class SocketUserImpl implements SocketUser {
     @Override
     public void deleteNotification(int notificationId) throws Exception {
         Request request = new Request(ActionType.USER_DELETE_NOTIFICATION, notificationId);
-        boolean bool = SocketsUtilMethods.requestWithBooleanReturnTypeWithoutImages(request);
+        boolean bool = socketsUtilMethods.requestWithBooleanReturnTypeWithoutImages(request);
         if (!bool)
             throw new Exception("Notification could not be deleted");
     }

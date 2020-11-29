@@ -15,16 +15,16 @@ import java.util.List;
 @Component
 public class SocketsUtilMethods
 {
-    private static Gson gson;
+    private Gson gson;
 
     @Autowired
-    static ServerConnector serverConnector;
+    private ServerConnector serverConnector;
 
     public SocketsUtilMethods() {
         gson = new Gson();
     }
 
-    public static List<PostShortVersion> getPosts(Request request)
+    public List<PostShortVersion> getPosts(Request request)
     {
         ActualRequest response = serverConnector.requestToServer(new ActualRequest(request, null));
         if (response.getRequest().getArgument() == null)
@@ -33,18 +33,25 @@ public class SocketsUtilMethods
         List<PostShortVersion> posts = gson.fromJson(response.getRequest().getArgument().toString(), postListType);
         if (response.getImages() != null && !response.getImages().isEmpty())
         {
+            List<byte[]> images = response.getImages();
             int imageCounter = 0;
+
+            for (PostShortVersion post : posts) {
+                post.getOwner().setAvatar(images.get(imageCounter++));
+            }
+
             for (PostShortVersion post : posts) {
                 if (post.hasImage())
-                    post.setPicture(response.getImages().get(imageCounter++));
+                    post.setPicture(images.get(imageCounter++));
             }
         }
 
         return posts;
     }
 
-    public static boolean requestWithBooleanReturnTypeWithoutImages(Request request)
+    public boolean requestWithBooleanReturnTypeWithoutImages(Request request)
     {
+        System.out.println("Heeerrreeeee");
         ActualRequest requestResponse = serverConnector.requestToServer(new ActualRequest(request, null));
         if (requestResponse == null || requestResponse.getRequest() == null)
             return false;
@@ -54,7 +61,7 @@ public class SocketsUtilMethods
         return bool;
     }
 
-    public static int requestWithIntegerReturnTypeWithoutImages(Request request)
+    public int requestWithIntegerReturnTypeWithoutImages(Request request)
     {
         ActualRequest requestResponse = serverConnector.requestToServer(new ActualRequest(request, null));
         if (requestResponse == null || requestResponse.getRequest() == null)

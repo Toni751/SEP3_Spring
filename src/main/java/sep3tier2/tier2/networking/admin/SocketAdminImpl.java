@@ -15,9 +15,13 @@ import java.util.List;
 @Component
 public class SocketAdminImpl implements SocketAdmin
 {
-    Gson gson;
+    private Gson gson;
+
     @Autowired
     ServerConnectorImpl serverConnectorImpl;
+
+    @Autowired
+    SocketsUtilMethods socketsUtilMethods;
 
     public SocketAdminImpl() {
         gson = new Gson();
@@ -48,12 +52,12 @@ public class SocketAdminImpl implements SocketAdmin
         paginationInts.add(limit);
         paginationInts.add(offset);
         Request request = new Request(ActionType.ADMIN_GET_POSTS, paginationInts);
-        return SocketsUtilMethods.getPosts(request);
+        return socketsUtilMethods.getPosts(request);
     }
 
     @Override
     public int getTotalNumberOfModel(String model) {
         Request request = new Request(ActionType.ADMIN_GET_NUMBER, model);
-        return SocketsUtilMethods.requestWithIntegerReturnTypeWithoutImages(request);
+        return socketsUtilMethods.requestWithIntegerReturnTypeWithoutImages(request);
     }
 }
