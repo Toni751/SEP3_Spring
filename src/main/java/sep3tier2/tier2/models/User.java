@@ -10,7 +10,7 @@ public class User
     private String password;
     private String name;
     private String description;
-    private List<Post> posts; //ids of posts
+//    private List<Post> posts; //ids of posts
     private List<Integer> likedPosts; //ids of liked posts
     private String city;
     private Address address;
@@ -80,14 +80,12 @@ public class User
 
     public void clearProfileBackground()
     {
-        profileBackground = new byte[1];
-        profileBackground[0] = '1';
+        profileBackground = null;
     }
 
     public void clearAvatar()
     {
-        avatar = new byte[1];
-        avatar[0] = '1';
+        avatar = null;
     }
 
     public void setAvatar(byte[] avatar) {

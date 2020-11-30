@@ -1,12 +1,14 @@
 package sep3tier2.tier2.networking.user;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import sep3tier2.tier2.models.*;
 import sep3tier2.tier2.networking.ServerConnector;
 import sep3tier2.tier2.services.SocketsUtilMethods;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +60,12 @@ public class SocketUserImpl implements SocketUser {
             user.clearProfileBackground();
         }
         Request request = new Request(ActionType.USER_EDIT, user);
-        boolean bool = socketsUtilMethods.requestWithBooleanReturnTypeWithoutImages(request);
+        ActualRequest requestResponse = serverConnector.requestToServer(new ActualRequest(request, userImages));
+        if (requestResponse == null || requestResponse.getRequest() == null)
+            throw new Exception("User could not be edited");
+
+        Boolean bool = gson.fromJson(requestResponse.getRequest().getArgument().toString(), Boolean.class);
+        System.out.println("Boolean request result is " + bool);
         if (!bool)
             throw new Exception("User could not be edited");
     }
@@ -103,8 +110,19 @@ public class SocketUserImpl implements SocketUser {
     @Override
     public void deleteNotification(int notificationId) throws Exception {
         Request request = new Request(ActionType.USER_DELETE_NOTIFICATION, notificationId);
-        boolean bool = socketsUtilMethods.requestWithBooleanReturnTypeWithoutImages(request);
+         boolean bool = socketsUtilMethods.requestWithBooleanReturnTypeWithoutImages(request);
         if (!bool)
             throw new Exception("Notification could not be deleted");
+    }
+
+    @Override
+    public List<SearchBarUser> getUsersByFilter(String filter) {
+        Request request = new Request(ActionType.USER_FILTER, filter);
+        ActualRequest response = serverConnector.requestToServer(new ActualRequest(request, null));
+        if(response == null || response.getRequest() == null || response.getRequest().getArgument() == null)
+            return null;
+
+        Type searchbarUserListType = new TypeToken<List<SearchBarUser>>(){}.getType();
+        return gson.fromJson(response.getRequest().getArgument().toString(), searchbarUserListType);
     }
 }

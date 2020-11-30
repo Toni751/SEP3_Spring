@@ -18,8 +18,7 @@ public class PostsController {
 
     @CrossOrigin(origins = "*")
     @PostMapping
-    public @ResponseBody
-    int addPost(@RequestBody PostShortVersion post) {
+    public @ResponseBody int addPost(@RequestBody PostShortVersion post) {
         System.out.println("Controller adding post");
         try {
             return postService.addPost(post);
@@ -29,12 +28,11 @@ public class PostsController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/{id}")
-    public @ResponseBody
-    Post getPostById(@PathVariable int id) {
-        System.out.println("Controller getting post by id " + id);
+    @GetMapping()
+    public @ResponseBody PostShortVersion getPostById(@RequestParam("postId") int postId, @RequestParam("userId") int userId) {
+        System.out.println("Controller getting post by id " + postId + " by user " + userId);
         try {
-            return postService.getPostById(id);
+            return postService.getPostById(postId, userId);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
@@ -66,7 +64,7 @@ public class PostsController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/wall")
-    public @ResponseBody List<PostShortVersion> getPostsForUser(@RequestParam("forId") int forId, @RequestParam("offset") int offset) {
+    public @ResponseBody List<Integer> getPostsForUser(@RequestParam("forId") int forId, @RequestParam("offset") int offset) {
         System.out.println("Controller getting news feed posts for user " + forId);
         try {
             return postService.getLatestPostsForUser(forId, offset);

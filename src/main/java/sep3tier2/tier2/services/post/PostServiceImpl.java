@@ -23,11 +23,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post getPostById(int postId) throws Exception {
-        if (postId < 0)
-            throw new Exception("Invalid post id");
+    public PostShortVersion getPostById(int postId, int userId) throws Exception {
+        if (postId < 0 || userId < 0)
+            throw new Exception("Invalid request parameters");
         try {
-            return socketPost.getPostById(postId);
+            return socketPost.getPostById(postId, userId);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -54,7 +54,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostShortVersion> getLatestPostsForUser(int id, int offset) throws Exception {
+    public List<Integer> getLatestPostsForUser(int id, int offset) throws Exception {
         if (id < 0 || offset < 0)
             throw new Exception("Invalid request parameters");
         return socketPost.getLatestPostsForUser(id, offset);

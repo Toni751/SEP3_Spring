@@ -7,10 +7,10 @@ import java.util.List;
 public interface SocketPost
 {
     int addPost(PostShortVersion post);
-    Post getPostById(int postId) throws Exception;
+    PostShortVersion getPostById(int postId, int userId) throws Exception;
     void editPost (PostShortVersion post) throws Exception;
     void deletePost(int postId) throws Exception;
-    List<PostShortVersion> getLatestPostsForUser(int id, int offset);
+    List<Integer> getLatestPostsForUser(int id, int offset);
     List<Integer> getLatestPostsByUser(int id, int offset);
     int postPostAction(PostAction postAction) throws Exception;
     int addCommentToPost(CommentForPost comment) throws Exception;

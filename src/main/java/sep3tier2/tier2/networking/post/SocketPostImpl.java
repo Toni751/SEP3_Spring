@@ -45,27 +45,30 @@ public class SocketPostImpl implements SocketPost
     }
 
     @Override
-    public Post getPostById(int postId) throws Exception {
-        Request request = new Request(ActionType.POST_GET_BY_ID, postId);
+    public PostShortVersion getPostById(int postId, int userId) throws Exception {
+        List<Integer> ints = new ArrayList<>();
+        ints.add(postId);
+        ints.add(userId);
+        Request request = new Request(ActionType.POST_GET_BY_ID, ints);
         ActualRequest response = serverConnector.requestToServer(new ActualRequest(request, null));
         if (response.getRequest() == null || response.getRequest().getArgument() == null)
             throw new Exception("Could not retrieve post with id " + postId);
-        Post post = gson.fromJson(response.getRequest().getArgument().toString(), Post.class);
+        PostShortVersion post = gson.fromJson(response.getRequest().getArgument().toString(), PostShortVersion.class);
         if(response.getImages() != null)
         {
             post.getOwner().setAvatar(response.getImages().get(0));
-            response.getImages().remove(0);
+//            response.getImages().remove(0);
 
             if(post.hasImage())
-            {
-                post.setPicture(response.getImages().get(0));
-                response.getImages().remove(0);
-            }
-            if(response.getImages() != null && !response.getImages().isEmpty()) {
-                for (int i = 0; i < response.getImages().size(); i++) {
-                    post.getComments().get(i).getOwner().setAvatar(response.getImages().get(i));
-                }
-            }
+                post.setPicture(response.getImages().get(1));
+//            {
+//                response.getImages().remove(0);
+//            }
+//            if(response.getImages() != null && !response.getImages().isEmpty()) {
+//                for (int i = 0; i < response.getImages().size(); i++) {
+//                    post.getComments().get(i).getOwner().setAvatar(response.getImages().get(i));
+//                }
+//            }
         }
 
         return post;
@@ -96,13 +99,12 @@ public class SocketPostImpl implements SocketPost
     }
 
     @Override
-    public List<PostShortVersion> getLatestPostsForUser(int id, int offset) {
-//        List<Integer> integers = new ArrayList<>();
-//        integers.add(id);
-//        integers.add(offset);
-//        Request request = new Request(ActionType.POST_GET_FOR_USER, integers);
-//        return socketsUtilMethods.getPosts(request);
-        return null;
+    public List<Integer> getLatestPostsForUser(int id, int offset) {
+        List<Integer> integers = new ArrayList<>();
+        integers.add(id);
+        integers.add(offset);
+        Request request = new Request(ActionType.POST_GET_FOR_USER, integers);
+        return socketsUtilMethods.getPosts(request);
     }
 
     @Override

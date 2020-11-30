@@ -1,6 +1,6 @@
 package sep3tier2.tier2.services.user;
 
-import sep3tier2.tier2.models.Post;
+import sep3tier2.tier2.models.SearchBarUser;
 import sep3tier2.tier2.models.User;
 import sep3tier2.tier2.models.UserAction;
 import sep3tier2.tier2.models.UserShortVersion;
@@ -16,4 +16,5 @@ public interface UserService
     void deleteUser(int id) throws Exception;
     int postUserAction(UserAction userAction) throws Exception;
     void deleteNotification(int notificationId) throws Exception;
+    List<SearchBarUser> getUsersByFilter(String filter) throws Exception;
 }

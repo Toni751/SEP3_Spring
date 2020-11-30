@@ -14,7 +14,7 @@ public class PostShortVersion
     private int numberOfComments;
     private int numberOfLikes;
     private boolean hasImage;
-
+    private boolean[] postStatus;
 
     public int getId() {
         return id;
@@ -56,5 +56,9 @@ public class PostShortVersion
 
     public void clearPicture() {
         picture = null;
+    }
+
+    public boolean[] getPostStatus() {
+        return postStatus;
     }
 }

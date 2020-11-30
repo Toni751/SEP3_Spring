@@ -97,4 +97,12 @@ public class UserServiceImpl implements UserService {
             throw new Exception(e.getMessage());
         }
     }
+
+    @Override
+    public List<SearchBarUser> getUsersByFilter(String filter) throws Exception{
+        if (filter == null || filter.equals(""))
+            throw new Exception("Invalid filter string");
+
+        return socketUser.getUsersByFilter(filter);
+    }
 }
