@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class SocketUserImpl implements SocketUser {
+public class SocketUserImpl implements SocketUser
+{
     private Gson gson;
 
     @Autowired
@@ -124,5 +125,28 @@ public class SocketUserImpl implements SocketUser {
 
         Type searchbarUserListType = new TypeToken<List<SearchBarUser>>(){}.getType();
         return gson.fromJson(response.getRequest().getArgument().toString(), searchbarUserListType);
+    }
+
+    @Override
+    public List<UserShortVersion> getGymsByCity(String city) throws Exception {
+        Request request = new Request(ActionType.USER_GET_GYMS, city);
+        List<UserShortVersion> response = socketsUtilMethods.requestUsersWithImages(request);
+        if (response == null)
+            throw new Exception("Could not retrieve gyms from " + city);
+
+        return response;
+    }
+
+    @Override
+    public List<Notification> getNotificationsForUser(int id) throws Exception {
+        Request request = new Request(ActionType.USER_GET_NOTIFICATIONS, id);
+        ActualRequest response = serverConnector.requestToServer(new ActualRequest(request, null));
+        if (response == null || response.getRequest() == null)
+            throw new Exception("Could not retrieve notifications for user " + id);
+        if(response.getRequest().getArgument() == null)
+            return null;
+
+        Type notificationsListType = new TypeToken<List<Notification>>(){}.getType();
+        return gson.fromJson(response.getRequest().getArgument().toString(), notificationsListType);
     }
 }

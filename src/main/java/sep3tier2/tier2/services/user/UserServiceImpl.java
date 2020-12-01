@@ -103,6 +103,37 @@ public class UserServiceImpl implements UserService {
         if (filter == null || filter.equals(""))
             throw new Exception("Invalid filter string");
 
-        return socketUser.getUsersByFilter(filter);
+        try {
+            return socketUser.getUsersByFilter(filter);
+        }
+        catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<UserShortVersion> getGymsByCity(String city) throws Exception {
+        if (city == null || city.equals(""))
+            throw new Exception("Invalid city name");
+
+        try {
+            return socketUser.getGymsByCity(city);
+        }
+        catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Notification> getNotificationsForUser(int id) throws Exception {
+        if (id <= 0)
+            throw new Exception("Invalid user id");
+
+        try {
+            return socketUser.getNotificationsForUser(id);
+        }
+        catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 }

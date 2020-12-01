@@ -116,9 +116,26 @@ public class UsersController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/filter")
-    public List<UserShortVersion> getFilteredUserByName(@RequestParam("queryString") String queryString)
+    @GetMapping("/pages")
+    public List<UserShortVersion> getGymsInCity(@RequestParam("city") String city)
     {
-        return null;
+        System.out.println("Controller getting gyms in city " + city);
+        try {
+            return userService.getGymsByCity(city);
+        }catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/{id}/notifications")
+    public List<Notification> getNotificationsForUser(@PathVariable int id)
+    {
+        System.out.println("Controller getting notifications for user " + id);
+        try {
+            return userService.getNotificationsForUser(id);
+        }catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 }

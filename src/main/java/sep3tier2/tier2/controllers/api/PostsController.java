@@ -12,7 +12,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/posts")
-public class PostsController {
+public class PostsController
+{
     @Autowired
     PostService postService;
 

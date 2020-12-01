@@ -1,9 +1,6 @@
 package sep3tier2.tier2.services.user;
 
-import sep3tier2.tier2.models.SearchBarUser;
-import sep3tier2.tier2.models.User;
-import sep3tier2.tier2.models.UserAction;
-import sep3tier2.tier2.models.UserShortVersion;
+import sep3tier2.tier2.models.*;
 
 import java.util.List;
 
@@ -17,4 +14,6 @@ public interface UserService
     int postUserAction(UserAction userAction) throws Exception;
     void deleteNotification(int notificationId) throws Exception;
     List<SearchBarUser> getUsersByFilter(String filter) throws Exception;
+    List<UserShortVersion> getGymsByCity(String city) throws Exception;
+    List<Notification> getNotificationsForUser(int id) throws Exception;
 }

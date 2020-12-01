@@ -164,18 +164,10 @@ public class SocketPostImpl implements SocketPost
     @Override
     public List<UserShortVersion> getAllLikesForPost(int postId) throws Exception {
         Request request = new Request(ActionType.POST_GET_LIKES, postId);
-        ActualRequest response = serverConnector.requestToServer(new ActualRequest(request, null));
-        if(response == null || response.getRequest() == null)
+        List<UserShortVersion> response = socketsUtilMethods.requestUsersWithImages(request);
+        if (response == null)
             throw new Exception("Could not retrieve likes for post " + postId);
-        List<UserShortVersion> users = new ArrayList<>();
-        if(response.getRequest().getArgument() == null || response.getImages() == null)
-            return users;
 
-        Type commentListType = new TypeToken<List<UserShortVersion>>(){}.getType();
-        users = gson.fromJson(response.getRequest().getArgument().toString(), commentListType);
-        for (int i = 0; i < users.size(); i++) {
-            users.get(i).setAvatar(response.getImages().get(i));
-        }
-        return users;
+        return response;
     }
 }
