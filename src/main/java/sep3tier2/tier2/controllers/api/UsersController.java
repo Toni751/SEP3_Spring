@@ -78,7 +78,8 @@ public class UsersController {
 
     @CrossOrigin(origins = "*")
     @GetMapping()
-    public @ResponseBody User getUserById(@RequestParam("senderId") int senderId, @RequestParam("receiverId") int receiverId) {
+    public @ResponseBody
+    User getUserById(@RequestParam("senderId") int senderId, @RequestParam("receiverId") int receiverId) {
         System.out.println("Controller get user " + receiverId + " by " + senderId);
         return userService.getUserById(senderId, receiverId);
     }
@@ -96,16 +97,20 @@ public class UsersController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/friends/{id}")
-    public List<UserShortVersion> getFriendListForUser(@PathVariable int id) {
-        System.out.println("Controller get friend list for user " + id);
-        return null;
+    @GetMapping("{id}/friends")
+    public List<UserShortVersion> getFriendListForUser(@PathVariable int id,
+                @RequestParam("senderId") int senderId, @RequestParam("offset") int offset) {
+        System.out.println("Controller get friend list for user " + id + " by user " + senderId + " with offset " + offset);
+        try {
+            return userService.getFriendListForUser(id, senderId, offset);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
     @CrossOrigin(origins = "*")
     @DeleteMapping("/notifications/{id}")
-    public HttpStatus markNotificationAsRead(@PathVariable int id)
-    {
+    public HttpStatus markNotificationAsRead(@PathVariable int id) {
         System.out.println("Controller deleting notification " + id);
         try {
             userService.deleteNotification(id);
@@ -117,24 +122,22 @@ public class UsersController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/pages")
-    public List<UserShortVersion> getGymsInCity(@RequestParam("city") String city)
-    {
+    public List<UserShortVersion> getGymsInCity(@RequestParam("city") String city) {
         System.out.println("Controller getting gyms in city " + city);
         try {
             return userService.getGymsByCity(city);
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
     @CrossOrigin(origins = "*")
     @GetMapping("/{id}/notifications")
-    public List<Notification> getNotificationsForUser(@PathVariable int id)
-    {
+    public List<Notification> getNotificationsForUser(@PathVariable int id) {
         System.out.println("Controller getting notifications for user " + id);
         try {
             return userService.getNotificationsForUser(id);
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }

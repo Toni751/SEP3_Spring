@@ -136,4 +136,16 @@ public class UserServiceImpl implements UserService {
             throw new Exception(e.getMessage());
         }
     }
+
+    @Override
+    public List<UserShortVersion> getFriendListForUser(int userId, int senderId, int offset) throws Exception {
+        if (userId <= 0 || senderId <= 0 || offset < 0)
+            throw new Exception("Invalid request parameters");
+
+        try {
+            return socketUser.getFriendListForUser(userId, senderId, offset) ;}
+        catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }

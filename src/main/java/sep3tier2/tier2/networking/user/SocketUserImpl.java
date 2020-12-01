@@ -149,4 +149,18 @@ public class SocketUserImpl implements SocketUser
         Type notificationsListType = new TypeToken<List<Notification>>(){}.getType();
         return gson.fromJson(response.getRequest().getArgument().toString(), notificationsListType);
     }
+
+    @Override
+    public List<UserShortVersion> getFriendListForUser(int userId, int senderId, int offset) throws Exception {
+        List<Integer> ints = new ArrayList<>();
+        ints.add(userId);
+        ints.add(senderId);
+        ints.add(offset);
+        Request request = new Request(ActionType.USER_GET_FRIENDS, ints);
+        List<UserShortVersion> response = socketsUtilMethods.requestUsersWithImages(request);
+        if (response == null)
+            throw new Exception("Could not retrieve friend list for user " + userId);
+
+        return response;
+    }
 }
