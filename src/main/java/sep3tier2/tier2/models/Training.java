@@ -10,7 +10,7 @@ public class Training
     private String timeStamp;
     private int duration;
     private boolean isCompleted;
-    private boolean isPublic;
+    private boolean global;
     private List<Exercise> exercises;
 
     public int getId() {
@@ -38,7 +38,7 @@ public class Training
     }
 
     public boolean isPublic() {
-        return isPublic;
+        return global;
     }
 
     public List<Exercise> getExercises() {
