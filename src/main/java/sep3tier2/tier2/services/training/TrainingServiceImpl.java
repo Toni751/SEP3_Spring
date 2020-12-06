@@ -83,6 +83,17 @@ public class TrainingServiceImpl implements TrainingService
     }
 
     @Override
+    public List<TrainingSVWithTime> getTrainingsTodayForUser(int userId) throws Exception {
+        if (userId <= 0)
+            throw new Exception("Invalid user id for get trainings today "+ userId);
+        try{
+            return socketTraining.getTrainingsTodayForUser(userId);
+        }catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
     public void editTraining(Training training) throws Exception {
         try{
             socketTraining.editTraining(training);
@@ -116,6 +127,8 @@ public class TrainingServiceImpl implements TrainingService
 
     @Override
     public void editExerciseInTraining(int trainingId, Exercise exercise) throws Exception {
+        if(trainingId <= 0)
+            throw new Exception("Invalid training id");
         try{
             socketTraining.editExerciseInTraining(new ExerciseWithTraining(exercise.getId(), exercise.getTitle(), exercise.getDescription(), trainingId));
         }catch (Exception e) {

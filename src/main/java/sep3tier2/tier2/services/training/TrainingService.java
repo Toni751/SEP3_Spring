@@ -12,6 +12,7 @@ public interface TrainingService
     List<TrainingShortVersion> getPrivateTrainingsForUser(int userId, int offset) throws Exception;
     List<TrainingSVWithOwner> getTrainingsForUser(int id, int offset) throws Exception;
     List<TrainingSVWithTime> getTrainingsInWeekForUser(int userId, int weekNumber) throws Exception;
+    List<TrainingSVWithTime> getTrainingsTodayForUser(int userId) throws Exception;
     void editTraining(Training training) throws Exception;
     void deleteTraining(int id) throws Exception;
     int addExerciseToTraining(int trainingId, Exercise exercise) throws Exception;

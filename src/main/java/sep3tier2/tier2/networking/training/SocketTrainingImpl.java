@@ -52,7 +52,7 @@ public class SocketTrainingImpl implements SocketTraining
     public List<TrainingSVWithOwner> getPublicTrainings(int offset) throws Exception {
         Request request = new Request(ActionType.TRAINING_GET_PUBLIC, offset);
         ActualRequest response = serverConnector.requestToServer(new ActualRequest(request, null));
-        if (response.getRequest().getArgument() == null)
+        if (response == null || response.getRequest() == null)
             throw new Exception("Could not retrieve public trainings");
 
         Type trainingListType = new TypeToken<List<TrainingSVWithOwner>>(){}.getType();
@@ -66,7 +66,7 @@ public class SocketTrainingImpl implements SocketTraining
         ints.add(offset);
         Request request = new Request(ActionType.TRAINING_GET_PRIVATE, ints);
         ActualRequest response = serverConnector.requestToServer(new ActualRequest(request, null));
-        if (response.getRequest().getArgument() == null)
+        if (response == null || response.getRequest() == null)
             throw new Exception("Could not retrieve private trainings");
 
         Type trainingListType = new TypeToken<List<TrainingShortVersion>>(){}.getType();
@@ -96,6 +96,17 @@ public class SocketTrainingImpl implements SocketTraining
         ActualRequest response = serverConnector.requestToServer(new ActualRequest(request, null));
         if (response == null || response.getRequest() == null)
             throw new Exception("Could not get trainings in week " + weekNumber + " for user " + userId);
+
+        Type trainingsListType = new TypeToken<List<TrainingSVWithTime>>(){}.getType();
+        return gson.fromJson(response.getRequest().getArgument().toString(), trainingsListType);
+    }
+
+    @Override
+    public List<TrainingSVWithTime> getTrainingsTodayForUser(int userId) throws Exception {
+        Request request = new Request(ActionType.TRAINING_GET_TODAY, userId);
+        ActualRequest response = serverConnector.requestToServer(new ActualRequest(request, null));
+        if (response == null || response.getRequest() == null)
+            throw new Exception("Could not get today trainings for user " + userId);
 
         Type trainingsListType = new TypeToken<List<TrainingSVWithTime>>(){}.getType();
         return gson.fromJson(response.getRequest().getArgument().toString(), trainingsListType);

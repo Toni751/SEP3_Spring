@@ -29,7 +29,7 @@ public class TrainingsController
 
     @CrossOrigin(origins = "*")
     @GetMapping("/{id}")
-    public @ResponseBody Training getTrainingById(@PathVariable int id) {
+    public @ResponseBody TrainingWithOwner getTrainingById(@PathVariable int id) {
         System.out.println("Controller getting training with id " + id);
         try {
             return trainingService.getTrainingById(id);
@@ -73,10 +73,21 @@ public class TrainingsController
 
     @CrossOrigin(origins = "*")
     @GetMapping()
-    public @ResponseBody List<TrainingSVWithTime> getTrainingsInWeekForUser(@RequestParam("userId") int userId, @RequestParam("weekNumber") int weekNumber) {
+    public @ResponseBody List<TrainingSVWithTime> getTrainingsInWeekForUser(@RequestParam("userId") int userId, @RequestParam("weekNumber") int weekNumber){
         System.out.println("Controller getting trainings for user " + userId + " in week " + weekNumber);
         try {
             return trainingService.getTrainingsInWeekForUser(userId, weekNumber);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/today")
+    public @ResponseBody List<TrainingSVWithTime> getTrainingsTodayForUser(@RequestParam("userId") int userId){
+        System.out.println("Controller getting trainings today for user " + userId);
+        try {
+            return trainingService.getTrainingsTodayForUser(userId);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
