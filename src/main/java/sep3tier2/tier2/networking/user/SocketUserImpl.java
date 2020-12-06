@@ -151,16 +151,26 @@ public class SocketUserImpl implements SocketUser
     }
 
     @Override
-    public List<UserShortVersion> getFriendListForUser(int userId, int senderId, int offset) throws Exception {
+    public List<UserShortVersionWithStatus> getFriendListForUser(int userId, int senderId, int offset) throws Exception {
         List<Integer> ints = new ArrayList<>();
         ints.add(userId);
         ints.add(senderId);
         ints.add(offset);
         Request request = new Request(ActionType.USER_GET_FRIENDS, ints);
-        List<UserShortVersion> response = socketsUtilMethods.requestUsersWithImages(request);
-        if (response == null)
-            throw new Exception("Could not retrieve friend list for user " + userId);
+        ActualRequest response = serverConnector.requestToServer(new ActualRequest(request, null));
+        if(response == null || response.getRequest() == null)
+            throw new Exception("Could not get friends for user " + userId + " by user " + senderId);
 
-        return response;
+        List<UserShortVersionWithStatus> users = new ArrayList<>();
+        if(response.getRequest().getArgument() == null || response.getImages() == null)
+            return users;
+
+        Type commentListType = new TypeToken<List<UserShortVersionWithStatus>>(){}.getType();
+        users = gson.fromJson(response.getRequest().getArgument().toString(), commentListType);
+        for (int i = 0; i < users.size(); i++) {
+            users.get(i).setAvatar(response.getImages().get(i));
+        }
+        return users;
+
     }
 }

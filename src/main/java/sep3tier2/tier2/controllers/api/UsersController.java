@@ -98,7 +98,7 @@ public class UsersController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("{id}/friends")
-    public List<UserShortVersion> getFriendListForUser(@PathVariable int id,
+    public List<UserShortVersionWithStatus> getFriendListForUser(@PathVariable int id,
                 @RequestParam("senderId") int senderId, @RequestParam("offset") int offset) {
         System.out.println("Controller get friend list for user " + id + " by user " + senderId + " with offset " + offset);
         try {

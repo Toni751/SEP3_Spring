@@ -138,7 +138,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserShortVersion> getFriendListForUser(int userId, int senderId, int offset) throws Exception {
+    public List<UserShortVersionWithStatus> getFriendListForUser(int userId, int senderId, int offset) throws Exception {
         if (userId <= 0 || senderId <= 0 || offset < 0)
             throw new Exception("Invalid request parameters");
 

@@ -16,5 +16,5 @@ public interface SocketUser
     List<SearchBarUser> getUsersByFilter(String filter);
     List<UserShortVersion> getGymsByCity(String city) throws Exception;
     List<Notification> getNotificationsForUser(int id) throws Exception;
-    List<UserShortVersion> getFriendListForUser(int userId, int senderId, int offset) throws Exception;
+    List<UserShortVersionWithStatus> getFriendListForUser(int userId, int senderId, int offset) throws Exception;
 }
