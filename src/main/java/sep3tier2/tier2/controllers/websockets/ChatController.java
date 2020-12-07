@@ -32,10 +32,15 @@ public class ChatController
     {
         System.out.println("Got message " + message.getContent());
         try {
-            List<Integer> ints = chatService.addMessage(message);
+            Message temp = new Message(message.getSenderId(), message.getReceiverId(), message.getContent(), message.getTimeStamp(), message.hasImage(), message.getPicture());
+
+
+            List<Integer> ints = chatService.addMessage(temp);
             message.setId(ints.get(0));
             Notification notification = new Notification(ints.get(1), message.getSenderId(), message.getSenderName(), message.getReceiverId(), ActionType.MESSAGE_CREATE);
 
+            if(message.getPicture() != null && message.getPicture().length > 1 && message.getContent() == null)
+                message.setContent(" ");
             messagingTemplate.convertAndSend("/topic/notifications/" + message.getReceiverId(), notification);
             messagingTemplate.convertAndSend("/topic/chat/" + message.getReceiverId(), message);
 
