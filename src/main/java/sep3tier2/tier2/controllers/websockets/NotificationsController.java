@@ -11,6 +11,8 @@ import sep3tier2.tier2.models.Notification;
 import sep3tier2.tier2.models.UserAction;
 import sep3tier2.tier2.services.user.UserService;
 
+import java.util.List;
+
 @Controller
 public class NotificationsController
 {
@@ -36,5 +38,37 @@ public class NotificationsController
            messagingTemplate.convertAndSend("/topic/errors/" + userAction.getReceiverId(), userAction.getActionType() + "_ERROR");
         }
       // return userAction;
+    }
+
+    @MessageMapping("/logout")
+    public void logoutUser(@Payload int userId)
+    {
+        System.out.println("Logging out user with id " + userId);
+        try {
+            List<Integer> onlineFriendIds = userService.userLogInOrOut(userId, true);
+            if(onlineFriendIds != null && onlineFriendIds.size() > 0)
+                for (Integer onlineFriendId : onlineFriendIds) {
+                    System.out.println("Ws sending logout notification to user " + onlineFriendId);
+                    messagingTemplate.convertAndSend("/topic/new_offline/" + onlineFriendId, userId);
+                }
+        } catch (Exception e) {
+            System.out.println("Sending error message to clients");
+        }
+    }
+
+    @MessageMapping("/login")
+    public void loginUser(@Payload int userId)
+    {
+        System.out.println("Logging in user with id " + userId);
+        try {
+            List<Integer> onlineFriendIds = userService.userLogInOrOut(userId, false);
+            if(onlineFriendIds != null && onlineFriendIds.size() > 0)
+                for (Integer onlineFriendId : onlineFriendIds) {
+                    System.out.println("Ws sending logout notification to user " + onlineFriendId);
+                    messagingTemplate.convertAndSend("/topic/new_offline/" + onlineFriendId, userId);
+                }
+        } catch (Exception e) {
+            System.out.println("Sending error message to clients");
+        }
     }
 }

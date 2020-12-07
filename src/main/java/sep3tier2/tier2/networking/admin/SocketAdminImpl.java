@@ -52,7 +52,7 @@ public class SocketAdminImpl implements SocketAdmin
         paginationInts.add(limit);
         paginationInts.add(offset);
         Request request = new Request(ActionType.ADMIN_GET_POSTS, paginationInts);
-        return socketsUtilMethods.getPosts(request);
+        return socketsUtilMethods.getIntegerList(request);
     }
 
     @Override

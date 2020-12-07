@@ -23,14 +23,14 @@ public class SocketsUtilMethods
         gson = new Gson();
     }
 
-    public List<Integer> getPosts(Request request)
+    public List<Integer> getIntegerList(Request request)
     {
         ActualRequest response = serverConnector.requestToServer(new ActualRequest(request, null));
         if (response.getRequest().getArgument() == null)
             return null;
 
-        Type postListType = new TypeToken<List<Integer>>(){}.getType();
-        return gson.fromJson(response.getRequest().getArgument().toString(), postListType);
+        Type integersListType = new TypeToken<List<Integer>>(){}.getType();
+        return gson.fromJson(response.getRequest().getArgument().toString(), integersListType);
     }
 
     public boolean requestWithBooleanReturnTypeWithoutImages(Request request)
@@ -65,8 +65,8 @@ public class SocketsUtilMethods
         if(response.getRequest().getArgument() == null || response.getImages() == null)
             return users;
 
-        Type commentListType = new TypeToken<List<UserShortVersion>>(){}.getType();
-        users = gson.fromJson(response.getRequest().getArgument().toString(), commentListType);
+        Type userListType = new TypeToken<List<UserShortVersion>>(){}.getType();
+        users = gson.fromJson(response.getRequest().getArgument().toString(), userListType);
         for (int i = 0; i < users.size(); i++) {
             users.get(i).setAvatar(response.getImages().get(i));
         }

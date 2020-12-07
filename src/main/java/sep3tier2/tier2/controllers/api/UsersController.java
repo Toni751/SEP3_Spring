@@ -68,14 +68,6 @@ public class UsersController {
         }
     }
 
-//    @CrossOrigin(origins = "*")
-//    @GetMapping("/wall")
-//    public @ResponseBody List<Post> retrieveRegularUserWall(@RequestParam("id") int id, @RequestParam("offset") int offset)
-//    {
-//        System.out.println("Controller get latest posts for a regular user");
-//        return userService.getLatestPostsForUser(id, offset);
-//    }
-
     @CrossOrigin(origins = "*")
     @GetMapping()
     public @ResponseBody
@@ -137,6 +129,30 @@ public class UsersController {
         System.out.println("Controller getting notifications for user " + id);
         try {
             return userService.getNotificationsForUser(id);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @CrossOrigin(origins = "*")
+    @PutMapping("/{id}/score")
+    public HttpStatus incrementUserScoreByAmount(@PathVariable int id, @RequestBody int amount)
+    {
+        System.out.println("Controller incrementing user " + id + " score by amount " + amount);
+        try {
+            userService.incrementUserScore(id, amount);
+            return HttpStatus.OK;
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("{id}/online_friends")
+    public List<UserShortVersion> getOnlineFriendsForUser(@PathVariable int id) {
+        System.out.println("Controller get online friends list for user " + id);
+        try {
+            return userService.getOnlineFriendsForUser(id);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

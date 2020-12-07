@@ -148,4 +148,34 @@ public class UserServiceImpl implements UserService {
             throw new Exception(e.getMessage());
         }
     }
+
+    @Override
+    public void incrementUserScore(int userId, int amount) throws Exception {
+        if(userId <= 0 || amount <= 0 )
+            throw new Exception("Invalid user/amount");
+        try {
+            socketUser.incrementUserScore(userId, amount);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<UserShortVersion> getOnlineFriendsForUser(int id) throws Exception {
+        if(id <= 0)
+            throw new Exception("Invalid user id " + id);
+        try {
+            return socketUser.getOnlineFriendsForUser(id);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Integer> userLogInOrOut(int userId, boolean isLogout) {
+        if(userId > 0)
+             return socketUser.userLogInOrOut(userId, isLogout);
+
+        return null;
+    }
 }

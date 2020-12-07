@@ -17,4 +17,7 @@ public interface SocketUser
     List<UserShortVersion> getGymsByCity(String city) throws Exception;
     List<Notification> getNotificationsForUser(int id) throws Exception;
     List<UserShortVersionWithStatus> getFriendListForUser(int userId, int senderId, int offset) throws Exception;
+    void incrementUserScore(int userId, int amount) throws Exception;
+    List<UserShortVersion> getOnlineFriendsForUser(int id) throws Exception;
+    List<Integer> userLogInOrOut(int userId, boolean isLogout);
 }

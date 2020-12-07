@@ -104,7 +104,7 @@ public class SocketPostImpl implements SocketPost
         integers.add(id);
         integers.add(offset);
         Request request = new Request(ActionType.POST_GET_FOR_USER, integers);
-        return socketsUtilMethods.getPosts(request);
+        return socketsUtilMethods.getIntegerList(request);
     }
 
     @Override
@@ -113,7 +113,7 @@ public class SocketPostImpl implements SocketPost
         integers.add(id);
         integers.add(offset);
         Request request = new Request(ActionType.POST_GET_BY_USER, integers);
-        return socketsUtilMethods.getPosts(request);
+        return socketsUtilMethods.getIntegerList(request);
     }
 
     @Override

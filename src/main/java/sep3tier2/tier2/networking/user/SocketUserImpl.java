@@ -173,4 +173,36 @@ public class SocketUserImpl implements SocketUser
         return users;
 
     }
+
+    @Override
+    public void incrementUserScore(int userId, int amount) throws Exception {
+        List<Integer> ints = new ArrayList<>();
+        ints.add(userId);
+        ints.add(amount);
+        boolean response = socketsUtilMethods.requestWithBooleanReturnTypeWithoutImages(new Request(ActionType.USER_INCREMENT_SCORE, ints));
+        if(!response)
+            throw new Exception("Could not increment user score");
+    }
+
+    @Override
+    public List<UserShortVersion> getOnlineFriendsForUser(int id) throws Exception {
+        Request request = new Request(ActionType.USER_GET_ONLINE_FRIENDS, id);
+        List<UserShortVersion> response = socketsUtilMethods.requestUsersWithImages(request);
+        if (response == null)
+            throw new Exception("Could not retrieve online friends for user " + id);
+
+        return response;
+    }
+
+    @Override
+    public List<Integer> userLogInOrOut(int userId, boolean isLogout) {
+        List<Integer> ints = new ArrayList<>();
+        ints.add(userId);
+        int boolInt = isLogout ? 1 : 0;
+        ints.add(boolInt);
+        Request request = new Request(ActionType.USER_LOGOUTORIN, ints);
+        return socketsUtilMethods.getIntegerList(request);
+    }
+
+
 }
