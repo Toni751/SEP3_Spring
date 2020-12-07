@@ -178,4 +178,12 @@ public class UserServiceImpl implements UserService {
 
         return null;
     }
+
+    @Override
+    public UserShortVersion getUserShortVersionById(int userId) {
+        if(userId > 0)
+            return socketUser.getUserShortVersionById(userId);
+
+        return null;
+    }
 }

@@ -204,5 +204,14 @@ public class SocketUserImpl implements SocketUser
         return socketsUtilMethods.getIntegerList(request);
     }
 
+    @Override
+    public UserShortVersion getUserShortVersionById(int userId) {
+        Request request = new Request(ActionType.USER_GET_SV_BY_ID, userId);
+        ActualRequest response = serverConnector.requestToServer(new ActualRequest(request, null));
+        UserShortVersion user = gson.fromJson(response.getRequest().getArgument().toString(), UserShortVersion.class);
+        user.setAvatar(response.getImages().get(0));
+        return user;
+    }
+
 
 }

@@ -9,6 +9,7 @@ import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
 import sep3tier2.tier2.models.Notification;
 import sep3tier2.tier2.models.UserAction;
+import sep3tier2.tier2.models.UserShortVersion;
 import sep3tier2.tier2.services.user.UserService;
 
 import java.util.List;
@@ -62,10 +63,11 @@ public class NotificationsController
         System.out.println("Logging in user with id " + userId);
         try {
             List<Integer> onlineFriendIds = userService.userLogInOrOut(userId, false);
+            UserShortVersion user = userService.getUserShortVersionById(userId);
             if(onlineFriendIds != null && onlineFriendIds.size() > 0)
                 for (Integer onlineFriendId : onlineFriendIds) {
-                    System.out.println("Ws sending logout notification to user " + onlineFriendId);
-                    messagingTemplate.convertAndSend("/topic/new_offline/" + onlineFriendId, userId);
+                    System.out.println("Ws sending login notification to user " + onlineFriendId);
+                    messagingTemplate.convertAndSend("/topic/new_online/" + onlineFriendId, user);
                 }
         } catch (Exception e) {
             System.out.println("Sending error message to clients");

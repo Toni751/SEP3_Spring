@@ -20,4 +20,5 @@ public interface SocketUser
     void incrementUserScore(int userId, int amount) throws Exception;
     List<UserShortVersion> getOnlineFriendsForUser(int id) throws Exception;
     List<Integer> userLogInOrOut(int userId, boolean isLogout);
+    UserShortVersion getUserShortVersionById(int userId);
 }

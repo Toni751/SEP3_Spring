@@ -20,7 +20,7 @@ public class ChatController
 //    DONE: GetLastMessageWithUsers(with offset)
 //    DONE: GetLatestMessagesWithFriend(friendId, offset)
 
-    // TODO: something for user logout and something about new message notifications (in db)
+    // DONE: something for user logout and something about new message notifications (in db)
     @Autowired
     private ChatService chatService;
 
