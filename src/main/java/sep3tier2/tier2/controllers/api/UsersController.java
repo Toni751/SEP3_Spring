@@ -147,11 +147,11 @@ public class UsersController {
 
     @CrossOrigin(origins = "*")
     @PutMapping("/{id}/score")
-    public HttpStatus incrementUserScoreByAmount(@PathVariable int id, @RequestBody int amount)
+    public HttpStatus incrementUserScoreByAmount(@PathVariable int id, @RequestParam("scoreToAdd") int scoreToAdd)
     {
-        System.out.println("Controller incrementing user " + id + " score by amount " + amount);
+        System.out.println("Controller incrementing user " + id + " score by amount " + scoreToAdd);
         try {
-            userService.incrementUserScore(id, amount);
+            userService.incrementUserScore(id, scoreToAdd);
             return HttpStatus.OK;
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());

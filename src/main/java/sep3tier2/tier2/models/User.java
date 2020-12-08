@@ -10,30 +10,14 @@ public class User
     private String password;
     private String name;
     private String description;
-//    private List<Post> posts; //ids of posts
-  //  private List<Integer> likedPosts; //ids of liked posts
     private String city;
+    private int score;
     private Address address;
     private byte[] avatar;
     private byte[] profileBackground;
     private boolean[] userStatus;
     private int relevantFriendsNumber;
-
-//    public User(int id, String email, String password, String name, String description, String city, Address address) {
-//        this.id = id;
-//        this.email = email;
-//        this.password = password;
-//        this.name = name;
-//        this.description = description;
-//        this.city = city;
-//        this.address = address;
-//        try
-//        {
-//            avatar = this.getClass().getClassLoader().getResourceAsStream("avatarimages/" + this.id + ".png").readAllBytes();
-//            profileBackground = this.getClass().getClassLoader().getResourceAsStream("backgroundimages/" + this.id + ".jpg").readAllBytes();
-//        }
-//        catch (IOException e) { e.printStackTrace(); }
-//    }
+    private int rating;
 
     public int getId() {
         return id;
@@ -50,15 +34,7 @@ public class User
     public String getDescription() {
         return description;
     }
-//
-//    public List<Integer> getPosts() {
-//        return posts;
-//    }
-//
-//    public List<Integer> getLikedPosts() {
-//        return likedPosts;
-//    }
-//
+
     public byte[] getAvatar() {
         return avatar;
     }
@@ -69,6 +45,14 @@ public class User
 
     public String getName() {
         return name;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public int getRating() {
+        return rating;
     }
 
     public String getCity() {

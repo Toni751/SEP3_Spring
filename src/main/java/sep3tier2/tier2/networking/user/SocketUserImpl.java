@@ -78,6 +78,8 @@ public class SocketUserImpl implements SocketUser
         userIds.add(receiverId);
         Request request = new Request(ActionType.USER_GET_BY_ID, userIds);
         ActualRequest userResponse = serverConnector.requestToServer(new ActualRequest(request, null));
+        if(userResponse == null || userResponse.getImages() == null)
+            return null;
 
         User user = gson.fromJson(userResponse.getRequest().getArgument().toString(), User.class);;
         if (userResponse.getImages() != null)
