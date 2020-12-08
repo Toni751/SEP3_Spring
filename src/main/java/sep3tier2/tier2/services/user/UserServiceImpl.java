@@ -180,10 +180,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserShortVersion getUserShortVersionById(int userId) {
-        if(userId > 0)
-            return socketUser.getUserShortVersionById(userId);
+    public UserShortVersion getUserShortVersionById(int userId) throws Exception{
+        if(userId <= 0)
+            throw new Exception("Invalid user id " + userId);
 
-        return null;
+        return socketUser.getUserShortVersionById(userId);
     }
 }

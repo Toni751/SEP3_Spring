@@ -77,6 +77,17 @@ public class UsersController {
     }
 
     @CrossOrigin(origins = "*")
+    @GetMapping("/{id}/short")
+    public @ResponseBody UserShortVersion getUserShortVersionById(@PathVariable int id) {
+        System.out.println("Controller getting user short version by id " + id);
+        try {
+            return userService.getUserShortVersionById(id);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @CrossOrigin(origins = "*")
     @PostMapping("/actions")
     public HttpStatus postUserAction(@RequestBody UserAction userAction) {
         System.out.println("Controller user action " + userAction.getActionType() + " with value " + userAction.getValue());

@@ -205,13 +205,14 @@ public class SocketUserImpl implements SocketUser
     }
 
     @Override
-    public UserShortVersion getUserShortVersionById(int userId) {
+    public UserShortVersion getUserShortVersionById(int userId){
         Request request = new Request(ActionType.USER_GET_SV_BY_ID, userId);
         ActualRequest response = serverConnector.requestToServer(new ActualRequest(request, null));
+        if(response == null || response.getRequest() == null || response.getImages() == null)
+            return null;
+
         UserShortVersion user = gson.fromJson(response.getRequest().getArgument().toString(), UserShortVersion.class);
         user.setAvatar(response.getImages().get(0));
         return user;
     }
-
-
 }
