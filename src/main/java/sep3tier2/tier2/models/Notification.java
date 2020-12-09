@@ -7,6 +7,7 @@ public class Notification
     private String senderName;
     private int receiverId;
     private ActionType actionType;
+    private boolean value;
 
     public Notification(int id, int senderId, String senderName, int receiverId, ActionType actionType) {
         this.id = id;
@@ -30,6 +31,14 @@ public class Notification
 
     public int getReceiverId() {
         return receiverId;
+    }
+
+    public boolean isValue() {
+        return value;
+    }
+
+    public void setValue(boolean value) {
+        this.value = value;
     }
 
     public ActionType getActionType() {

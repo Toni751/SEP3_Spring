@@ -32,6 +32,7 @@ public class NotificationsController
         try {
             int notificationId = userService.postUserAction(userAction);
             Notification notification = new Notification(notificationId, userAction.getSenderId(), userAction.getSenderName(), userAction.getReceiverId(), userAction.getActionType());
+            notification.setValue((boolean)userAction.getValue());
             messagingTemplate.convertAndSend("/topic/notifications/" + userAction.getReceiverId(), notification);
         } catch (Exception e) {
             System.out.println("Sending error message to clients");
