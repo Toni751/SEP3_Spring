@@ -12,6 +12,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The sockets class for handling posts requests
+ * @version 1.0
+ * @author Group1
+ */
 @Component
 public class SocketPostImpl implements SocketPost
 {
@@ -23,6 +28,9 @@ public class SocketPostImpl implements SocketPost
     @Autowired
     SocketsUtilMethods socketsUtilMethods;
 
+    /**
+     * No-argument constructor which initialized the gson object
+     */
     public SocketPostImpl() {
         gson = new Gson();
     }
@@ -57,18 +65,8 @@ public class SocketPostImpl implements SocketPost
         if(response.getImages() != null)
         {
             post.getOwner().setAvatar(response.getImages().get(0));
-//            response.getImages().remove(0);
-
             if(post.hasImage())
                 post.setPicture(response.getImages().get(1));
-//            {
-//                response.getImages().remove(0);
-//            }
-//            if(response.getImages() != null && !response.getImages().isEmpty()) {
-//                for (int i = 0; i < response.getImages().size(); i++) {
-//                    post.getComments().get(i).getOwner().setAvatar(response.getImages().get(i));
-//                }
-//            }
         }
 
         return post;

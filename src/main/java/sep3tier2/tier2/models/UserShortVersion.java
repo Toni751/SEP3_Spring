@@ -6,19 +6,17 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * A class for representing the short version of a user
+ * @version 1.0
+ * @author Group1
+ */
 public class UserShortVersion
 {
     private int userId;
     private String userFullName;
     private String accountType;
     private transient byte[] avatar;
-
-//
-//    public UserShortVersion(int userId, String userFullName, String accountType){
-//        this.userId = userId;
-//        this.userFullName = userFullName;
-//        this.accountType = accountType;
-//    }
 
     public int getUserId() {
         return userId;

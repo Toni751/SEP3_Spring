@@ -3,6 +3,11 @@ package sep3tier2.tier2.models;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * A class for representing a regular user as well as a page owner
+ * @version 1.0
+ * @author Group1
+ */
 public class User
 {
     private int id;

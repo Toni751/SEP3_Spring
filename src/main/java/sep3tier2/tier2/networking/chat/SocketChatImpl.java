@@ -12,6 +12,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The sockets class for handling chat requests
+ * @version 1.0
+ * @author Group1
+ */
 @Component
 public class SocketChatImpl implements SocketChat
 {
@@ -23,6 +28,9 @@ public class SocketChatImpl implements SocketChat
     @Autowired
     SocketsUtilMethods socketsUtilMethods;
 
+    /**
+     * No-argument constructor which initialized the gson object
+     */
     public SocketChatImpl() {
         gson = new Gson();
     }

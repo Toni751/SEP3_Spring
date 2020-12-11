@@ -1,5 +1,10 @@
 package sep3tier2.tier2.models;
 
+/**
+ * A class for representing a comment on a post, with the post it belongs to
+ * @version 1.0
+ * @author Group1
+ */
 public class CommentForPost
 {
     private int id;

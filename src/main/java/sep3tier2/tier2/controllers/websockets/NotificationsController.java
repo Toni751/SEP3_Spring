@@ -11,9 +11,13 @@ import sep3tier2.tier2.models.Notification;
 import sep3tier2.tier2.models.UserAction;
 import sep3tier2.tier2.models.UserShortVersion;
 import sep3tier2.tier2.services.user.UserService;
-
 import java.util.List;
 
+/**
+ * WebSockets Controller for notifications-related requests
+ * @version 1.0
+ * @author Group1
+ */
 @Controller
 public class NotificationsController
 {
@@ -23,12 +27,13 @@ public class NotificationsController
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
+    /**
+     * Creates a friends request/follow page request and sends a notification to the corresponding receiver
+     * @param userAction the user action to be created
+     */
     @MessageMapping("/note")
-   // @SendToUser("/topic/notifications")
     public void sendNotification(@Payload UserAction userAction)
     {
-        System.out.println(userAction.toString());
-        //messagingTemplate.convertAndSendToUser(String.valueOf(userAction.getSenderId()),"/topic/notifications", userAction);
         try {
             int notificationId = userService.postUserAction(userAction);
             Notification notification = new Notification(notificationId, userAction.getSenderId(), userAction.getSenderName(), userAction.getReceiverId(), userAction.getActionType());
@@ -39,13 +44,15 @@ public class NotificationsController
            messagingTemplate.convertAndSend("/topic/errors/" + userAction.getSenderId(), userAction.getActionType() + "_ERROR");
            messagingTemplate.convertAndSend("/topic/errors/" + userAction.getReceiverId(), userAction.getActionType() + "_ERROR");
         }
-      // return userAction;
     }
 
+    /**
+     * Logs out a given user and notifies all his friends
+     * @param userId the id of the user to be logged out
+     */
     @MessageMapping("/logout")
     public void logoutUser(@Payload int userId)
     {
-        System.out.println("Logging out user with id " + userId);
         try {
             List<Integer> onlineFriendIds = userService.userLogInOrOut(userId, true);
             if(onlineFriendIds != null && onlineFriendIds.size() > 0)
@@ -58,6 +65,10 @@ public class NotificationsController
         }
     }
 
+    /**
+     * Logs in a given user and notifies all his friends
+     * @param userId the id of the user to be logged in
+     */
     @MessageMapping("/login")
     public void loginUser(@Payload int userId)
     {

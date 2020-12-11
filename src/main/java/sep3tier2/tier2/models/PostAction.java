@@ -1,5 +1,10 @@
 package sep3tier2.tier2.models;
 
+/**
+ * A class for representing a post action(reaction or report)
+ * @version 1.0
+ * @author Group1
+ */
 public class PostAction
 {
     private int userId;

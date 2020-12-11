@@ -2,6 +2,11 @@ package sep3tier2.tier2.models;
 
 import java.util.List;
 
+/**
+ * A class for representing an sockets request, made by a regular request object and an array of images
+ * @version 1.0
+ * @author Group1
+ */
 public class ActualRequest {
 
     private Request request;

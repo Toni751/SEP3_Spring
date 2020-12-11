@@ -1,5 +1,10 @@
 package sep3tier2.tier2.models;
 
+/**
+ * A class for representing a user for a search bar query result
+ * @version 1.0
+ * @author Group1
+ */
 public class SearchBarUser
 {
     private int userId;

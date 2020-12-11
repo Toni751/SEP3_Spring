@@ -12,6 +12,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The sockets class for handling diet requests
+ * @version 1.0
+ * @author Group1
+ */
 @Component
 public class SocketDietImpl implements SocketDiet
 {
@@ -23,6 +28,9 @@ public class SocketDietImpl implements SocketDiet
     @Autowired
     SocketsUtilMethods socketsUtilMethods;
 
+    /**
+     * No-argument constructor which initialized the gson object
+     */
     public SocketDietImpl() {
         gson = new Gson();
     }

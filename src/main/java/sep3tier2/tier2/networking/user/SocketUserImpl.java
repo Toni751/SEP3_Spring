@@ -12,6 +12,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The sockets class for handling user requests
+ * @version 1.0
+ * @author Group1
+ */
 @Component
 public class SocketUserImpl implements SocketUser
 {
@@ -23,6 +28,9 @@ public class SocketUserImpl implements SocketUser
     @Autowired
     SocketsUtilMethods socketsUtilMethods;
 
+    /**
+     * No-argument constructor which initialized the gson object
+     */
     public SocketUserImpl() {
         gson = new Gson();
     }

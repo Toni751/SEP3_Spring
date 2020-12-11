@@ -1,5 +1,10 @@
 package sep3tier2.tier2.models;
 
+/**
+ * A class for representing a private message, with the sender's name included
+ * @version 1.0
+ * @author Group1
+ */
 public class MessageWithSenderName extends Message
 {
     private String senderName;

@@ -2,6 +2,11 @@ package sep3tier2.tier2.models;
 
 import java.util.List;
 
+/**
+ * A class for representing a training with exercises
+ * @version 1.0
+ * @author Group1
+ */
 public class Training
 {
     private int id;

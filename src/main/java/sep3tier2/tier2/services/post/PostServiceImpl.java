@@ -7,6 +7,11 @@ import sep3tier2.tier2.networking.post.SocketPost;
 
 import java.util.List;
 
+/**
+ * The service class for handling posts requests
+ * @version 1.0
+ * @author Group1
+ */
 @Service
 public class PostServiceImpl implements PostService {
     @Autowired
@@ -14,7 +19,6 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public int addPost(PostShortVersion post) throws Exception {
-        //add some validation maybe
         int postId = socketPost.addPost(post);
         if (postId < 0)
             throw new Exception("Error creating post, check post object fields");

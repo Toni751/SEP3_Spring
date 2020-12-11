@@ -1,5 +1,10 @@
 package sep3tier2.tier2.models;
 
+/**
+ * A class for representing a gym's address
+ * @version 1.0
+ * @author Group1
+ */
 public class Address
 {
     private int id;

@@ -10,6 +10,11 @@ import sep3tier2.tier2.services.chat.ChatService;
 
 import java.util.List;
 
+/**
+ * Rest API Controller for messages-related requests at the endpoint "/messages"
+ * @version 1.0
+ * @author Group1
+ */
 @RestController
 @RequestMapping("/messages")
 public class MessagesController
@@ -17,6 +22,12 @@ public class MessagesController
     @Autowired
     ChatService chatService;
 
+    /**
+     * Returns a list of most recent messages(with owner) belonging to a given user, skipping the first "offset" messages
+     * @param userId the id of the user
+     * @param offset the number of messages to be skipped
+     * @return the list of the user's last messages, with owners
+     */
     @CrossOrigin(origins = "*")
     @GetMapping("/recent")
     public @ResponseBody List<UserShortVersionWithMessage> getLastMessagesForUser(
@@ -30,6 +41,13 @@ public class MessagesController
         }
     }
 
+    /**
+     * Returns a list of recent messages between 2 users, skipping the first "offset" messages
+     * @param firstUserId the first user id
+     * @param secondUserId the second user id
+     * @param offset the number of messages to be skipped
+     * @return a list of recent messages between the 2 users, if any
+     */
     @CrossOrigin(origins = "*")
     @GetMapping()
     public @ResponseBody List<Message> getConversationForUsers(@RequestParam("firstUserId") int firstUserId,

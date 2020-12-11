@@ -1,5 +1,10 @@
 package sep3tier2.tier2.models;
 
+/**
+ * A class for representing and administrator object
+ * @version 1.0
+ * @author Group1
+ */
 public class Administrator
 {
     private int id;

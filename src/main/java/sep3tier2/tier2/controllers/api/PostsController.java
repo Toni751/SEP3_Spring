@@ -10,6 +10,11 @@ import sep3tier2.tier2.services.post.PostService;
 
 import java.util.List;
 
+/**
+ * Rest API Controller for posts-related requests at the endpoint "/posts"
+ * @version 1.0
+ * @author Group1
+ */
 @RestController
 @RequestMapping("/posts")
 public class PostsController
@@ -17,6 +22,11 @@ public class PostsController
     @Autowired
     PostService postService;
 
+    /**
+     * Adds a given post to a given user
+     * @param post the post to be added, with the owner id
+     * @return the id of the created post
+     */
     @CrossOrigin(origins = "*")
     @PostMapping
     public @ResponseBody int addPost(@RequestBody PostShortVersion post) {
@@ -28,6 +38,12 @@ public class PostsController
         }
     }
 
+    /**
+     * Gets a given post by id, for a given user
+     * @param postId the id of the post
+     * @param userId the id of the user
+     * @return the post with the given id, including the user's interactions with it(if the user liked/reported it)
+     */
     @CrossOrigin(origins = "*")
     @GetMapping()
     public @ResponseBody PostShortVersion getPostById(@RequestParam("postId") int postId, @RequestParam("userId") int userId) {
@@ -39,6 +55,12 @@ public class PostsController
         }
     }
 
+    /**
+     * Edits a post at a given id
+     * @param id the id of the post to be edited
+     * @param post the new value for the post
+     * @return Ok if the action was successful, Bad_Request otherwise
+     */
     @CrossOrigin(origins = "*")
     @PutMapping("/{id}")
     public HttpStatus editPost(@PathVariable int id, @RequestBody PostShortVersion post) {
@@ -51,6 +73,11 @@ public class PostsController
         }
     }
 
+    /**
+     * Deletes a post at a given id
+     * @param id the id of the post to be deleted
+     * @return Ok if the action was successful, Bad_Request otherwise
+     */
     @CrossOrigin(origins = "*")
     @DeleteMapping("/{id}")
     public HttpStatus deletePost(@PathVariable int id) {
@@ -63,6 +90,12 @@ public class PostsController
         }
     }
 
+    /**
+     * Retrieves a list of relevant posts for a user(i.e. his own, his friend's, his following page's) in reverse chronological order
+     * @param forId the user id
+     * @param offset the number of posts to be skipped
+     * @return a list with relevant post ids for a user
+     */
     @CrossOrigin(origins = "*")
     @GetMapping("/wall")
     public @ResponseBody List<Integer> getPostsForUser(@RequestParam("forId") int forId, @RequestParam("offset") int offset) {
@@ -74,6 +107,12 @@ public class PostsController
         }
     }
 
+    /**
+     * Gets a list of relevant posts created by a user, in reverse chronological order
+     * @param byId the user id
+     * @param offset the number of posts to be skipped
+     * @return a list with post ids created by the user
+     */
     @CrossOrigin(origins = "*")
     @GetMapping("/profile")
     public @ResponseBody List<Integer> getPostsByUser(@RequestParam("byId") int byId, @RequestParam("offset") int offset) {
@@ -85,6 +124,11 @@ public class PostsController
         }
     }
 
+    /**
+     * Creates a new action for a post(react or report) by a user
+     * @param postAction the post action to be added
+     * @return Ok if the action was successful, Bad_Request otherwise
+     */
     @CrossOrigin(origins = "*")
     @PostMapping("/actions")
     public HttpStatus postPostAction(@RequestBody PostAction postAction) {
@@ -97,6 +141,12 @@ public class PostsController
         }
     }
 
+    /**
+     * Creates a comment for a given post
+     * @param id the id of the post
+     * @param comment the comment to be created
+     * @return the id of the created comment
+     */
     @CrossOrigin(origins = "*")
     @PostMapping("/{id}")
     public int addCommentToPost(@PathVariable int id, @RequestBody Comment comment) {
@@ -108,6 +158,11 @@ public class PostsController
         }
     }
 
+    /**
+     * Deletes a comment at a given id
+     * @param id the id of the comment to be deleted
+     * @return Ok if the action was successful, Bad_Request otherwise
+     */
     @CrossOrigin(origins = "*")
     @DeleteMapping("/comments/{id}")
     public HttpStatus deleteComment(@PathVariable int id) {
@@ -120,6 +175,11 @@ public class PostsController
         }
     }
 
+    /**
+     * Retrieves all comments for a post, in reverse chronological order
+     * @param id the id of the post
+     * @return the list with all the comments belonging to the post
+     */
     @CrossOrigin(origins = "*")
     @GetMapping("/{id}/comments")
     public List<Comment> getAllCommentsForPost(@PathVariable int id)
@@ -132,6 +192,11 @@ public class PostsController
         }
     }
 
+    /**
+     * Retrieves all users who reacted to a post
+     * @param id the id of the post
+     * @return the list with all the users in alphabetical order
+     */
     @CrossOrigin(origins = "*")
     @GetMapping("/{id}/likes")
     public List<UserShortVersion> getAllLikesForPost(@PathVariable int id)

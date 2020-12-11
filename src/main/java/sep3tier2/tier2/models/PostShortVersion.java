@@ -3,6 +3,11 @@ package sep3tier2.tier2.models;
 import java.time.LocalDate;
 import java.util.Date;
 
+/**
+ * A class for representing a post without reactions or comments
+ * @version 1.0
+ * @author Group1
+ */
 public class PostShortVersion
 {
     private int id;

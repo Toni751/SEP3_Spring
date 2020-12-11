@@ -12,6 +12,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The sockets class for handling administrator requests
+ * @version 1.0
+ * @author Group1
+ */
 @Component
 public class SocketAdminImpl implements SocketAdmin
 {
@@ -23,6 +28,9 @@ public class SocketAdminImpl implements SocketAdmin
     @Autowired
     SocketsUtilMethods socketsUtilMethods;
 
+    /**
+     * No-argument constructor which initialized the gson object
+     */
     public SocketAdminImpl() {
         gson = new Gson();
     }

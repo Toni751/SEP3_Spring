@@ -11,9 +11,13 @@ import sep3tier2.tier2.models.Notification;
 import sep3tier2.tier2.models.SearchBarUser;
 import sep3tier2.tier2.models.UserAction;
 import sep3tier2.tier2.services.user.UserService;
-
 import java.util.List;
 
+/**
+ * WebSockets Controller for search bar-related requests
+ * @version 1.0
+ * @author Group1
+ */
 @Controller
 public class SearchBarController
 {
@@ -23,6 +27,10 @@ public class SearchBarController
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
+    /**
+     * Filters the users by a given query string and sends the result to the sender
+     * @param request the request containing the sender id and the query string
+     */
     @MessageMapping("/filter")
     public void sendNotification(@Payload FilterUsersRequest request)
     {

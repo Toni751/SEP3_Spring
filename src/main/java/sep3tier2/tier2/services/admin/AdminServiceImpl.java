@@ -8,6 +8,11 @@ import sep3tier2.tier2.networking.admin.SocketAdmin;
 
 import java.util.List;
 
+/**
+ * The service class for handling administrator requests
+ * @version 1.0
+ * @author Group1
+ */
 @Service
 public class AdminServiceImpl implements AdminService
 {

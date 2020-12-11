@@ -11,6 +11,11 @@ import sep3tier2.tier2.services.user.UserService;
 
 import java.util.List;
 
+/**
+ * WebSockets Controller for chat-related requests
+ * @version 1.0
+ * @author Group1
+ */
 @Controller
 public class ChatController
 {
@@ -27,6 +32,10 @@ public class ChatController
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
+    /**
+     * Sends a message as well as a notification to a given user, from another user
+     * @param message the message to be sent
+     */
     @MessageMapping("/chat")
     public void sendMessage(@Payload MessageWithSenderName message)
     {
@@ -54,6 +63,10 @@ public class ChatController
         }
     }
 
+    /**
+     * Deletes a given message
+     * @param message the message to be deleted
+     */
     @MessageMapping("/delete_message")
     public void deleteMessage(@Payload Message message)
     {

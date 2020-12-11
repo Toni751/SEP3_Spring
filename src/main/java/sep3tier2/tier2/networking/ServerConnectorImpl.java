@@ -13,6 +13,11 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class responsible for establishing, maintaining and closing sockets connections
+ * @version 1.0
+ * @author Group1
+ */
 @Component
 public class ServerConnectorImpl implements ServerConnector
 {
@@ -87,6 +92,12 @@ public class ServerConnectorImpl implements ServerConnector
         return null;
     }
 
+    /**
+     * Private method for reading input from the stream
+     * @param inputStream the input stream to read the input
+     * @return the bytes read converted to a string
+     * @throws IOException if no input could be read from the stream
+     */
     private String readFromStream(InputStream inputStream) throws IOException {
         byte[] readBytes = new byte[65535];
         int readResultLength = inputStream.read(readBytes);

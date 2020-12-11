@@ -11,6 +11,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class for frequently used sockets requests
+ * @version 1.0
+ * @author Group1
+ */
 @Component
 public class SocketsUtilMethods
 {
@@ -19,10 +24,18 @@ public class SocketsUtilMethods
     @Autowired
     private ServerConnector serverConnector;
 
+    /**
+     * No-argument constructor which initializes the gson object
+     */
     public SocketsUtilMethods() {
         gson = new Gson();
     }
 
+    /**
+     * Request for retrieving a list of integers from the server(tier 3), without images
+     * @param request the request to be sent
+     * @return the wanted list of integers
+     */
     public List<Integer> getIntegerList(Request request)
     {
         ActualRequest response = serverConnector.requestToServer(new ActualRequest(request, null));
@@ -33,6 +46,11 @@ public class SocketsUtilMethods
         return gson.fromJson(response.getRequest().getArgument().toString(), integersListType);
     }
 
+    /**
+     * Request for receiving a boolean response from the server(tier 3), without images
+     * @param request the request to be sent
+     * @return the boolean result of the request
+     */
     public boolean requestWithBooleanReturnTypeWithoutImages(Request request)
     {
         ActualRequest requestResponse = serverConnector.requestToServer(new ActualRequest(request, null));
@@ -44,6 +62,11 @@ public class SocketsUtilMethods
         return bool;
     }
 
+    /**
+     * Request for receiving an integer response from the server(tier 3), without images
+     * @param request the request to be sent
+     * @return the integer result of the request
+     */
     public int requestWithIntegerReturnTypeWithoutImages(Request request)
     {
         ActualRequest requestResponse = serverConnector.requestToServer(new ActualRequest(request, null));
@@ -55,6 +78,11 @@ public class SocketsUtilMethods
         return integer;
     }
 
+    /**
+     * Request for retrieving a list of user short version instances from the server(tier 3), with images
+     * @param request the request to be sent
+     * @return the wanted list of users
+     */
     public List<UserShortVersion> requestUsersWithImages(Request request)
     {
         ActualRequest response = serverConnector.requestToServer(new ActualRequest(request, null));

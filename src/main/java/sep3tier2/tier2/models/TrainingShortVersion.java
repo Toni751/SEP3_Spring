@@ -1,5 +1,10 @@
 package sep3tier2.tier2.models;
 
+/**
+ * A class for representing a short version of a training
+ * @version 1.0
+ * @author Group1
+ */
 public class TrainingShortVersion
 {
     private int trainingId;

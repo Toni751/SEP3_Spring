@@ -1,5 +1,10 @@
 package sep3tier2.tier2.models;
 
+/**
+ * A class for representing a physical exercise
+ * @version 1.0
+ * @author Group1
+ */
 public class Exercise
 {
     private int id;

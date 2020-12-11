@@ -1,5 +1,10 @@
 package sep3tier2.tier2.models;
 
+/**
+ * A class for representing a meal
+ * @version 1.0
+ * @author Group1
+ */
 public class Meal
 {
     private int id;

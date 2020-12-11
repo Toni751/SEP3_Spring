@@ -8,6 +8,11 @@ import sep3tier2.tier2.networking.user.SocketUser;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The service class for handling user requests
+ * @version 1.0
+ * @author Group1
+ */
 @Service
 public class UserServiceImpl implements UserService {
 

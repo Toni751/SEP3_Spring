@@ -1,5 +1,10 @@
 package sep3tier2.tier2.models;
 
+/**
+ * An enumeration of all the types of actions
+ * @version 1.0
+ * @author Group1
+ */
 public enum ActionType
 {
     USER_REGISTER,
