@@ -42,14 +42,9 @@ public class ServerConnectorImpl implements ServerConnector
                 Request informAboutImagesRequest = new Request(ActionType.HAS_IMAGES, imageSizes);
                 String informAboutImagesAsJson = gson.toJson(informAboutImagesRequest);
 
-                System.out.println("*******: " + informAboutImagesAsJson + " with size " + informAboutImagesAsJson.length());
-                System.out.println("Bytes size is " + informAboutImagesAsJson.getBytes().length);
-
                 outputStream.write(informAboutImagesAsJson.getBytes());
 
                 String confirmationAboutImages = readFromStream(inputStream);
-                System.out.println("Confirmation: " + confirmationAboutImages);
-              //  Thread.sleep(100);
 
                 for (byte[] image : images) {
                     outputStream.write(image);
@@ -57,8 +52,6 @@ public class ServerConnectorImpl implements ServerConnector
             }
             String requestAsJson = gson.toJson(request);
 
-            System.out.println("********* json request: " + requestAsJson);
-            //Thread.sleep(100);
             outputStream.write(requestAsJson.getBytes());
 
             String received = readFromStream(inputStream);

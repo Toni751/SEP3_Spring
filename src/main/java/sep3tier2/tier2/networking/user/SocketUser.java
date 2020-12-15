@@ -1,6 +1,6 @@
 package sep3tier2.tier2.networking.user;
 
-import sep3tier2.tier2.models.*;
+import sep3tier2.tier2.models.user.*;
 
 import java.util.List;
 

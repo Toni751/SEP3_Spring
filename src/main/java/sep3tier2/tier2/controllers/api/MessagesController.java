@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import sep3tier2.tier2.models.Message;
-import sep3tier2.tier2.models.UserShortVersionWithMessage;
+import sep3tier2.tier2.models.chat.Message;
+import sep3tier2.tier2.models.user.UserShortVersionWithMessage;
 import sep3tier2.tier2.services.chat.ChatService;
 
 import java.util.List;

@@ -2,10 +2,9 @@ package sep3tier2.tier2.services.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sep3tier2.tier2.models.*;
+import sep3tier2.tier2.models.user.*;
 import sep3tier2.tier2.networking.user.SocketUser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

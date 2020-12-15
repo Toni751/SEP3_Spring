@@ -3,9 +3,8 @@ package sep3tier2.tier2.controllers.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.server.ResponseStatusException;
-import sep3tier2.tier2.models.*;
+import sep3tier2.tier2.models.user.*;
 import sep3tier2.tier2.services.user.UserService;
 
 import java.util.List;
@@ -149,7 +148,7 @@ public class UsersController {
     @CrossOrigin(origins = "*")
     @GetMapping("{id}/friends")
     public List<UserShortVersionWithStatus> getFriendListForUser(@PathVariable int id,
-                @RequestParam("senderId") int senderId, @RequestParam("offset") int offset) {
+                                                                 @RequestParam("senderId") int senderId, @RequestParam("offset") int offset) {
         System.out.println("Controller get friend list for user " + id + " by user " + senderId + " with offset " + offset);
         try {
             return userService.getFriendListForUser(id, senderId, offset);

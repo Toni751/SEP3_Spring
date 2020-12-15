@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import sep3tier2.tier2.models.*;
+import sep3tier2.tier2.models.diet.*;
 import sep3tier2.tier2.services.diet.DietService;
 
 import java.util.List;

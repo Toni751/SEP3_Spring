@@ -1,6 +1,6 @@
 package sep3tier2.tier2.networking.training;
 
-import sep3tier2.tier2.models.*;
+import sep3tier2.tier2.models.training.*;
 
 import java.util.List;
 

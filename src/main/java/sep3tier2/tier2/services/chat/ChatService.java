@@ -1,7 +1,7 @@
 package sep3tier2.tier2.services.chat;
 
-import sep3tier2.tier2.models.Message;
-import sep3tier2.tier2.models.UserShortVersionWithMessage;
+import sep3tier2.tier2.models.chat.Message;
+import sep3tier2.tier2.models.user.UserShortVersionWithMessage;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package sep3tier2.tier2.networking.diet;
 
-import sep3tier2.tier2.models.*;
+import sep3tier2.tier2.models.diet.*;
 
 import java.util.List;
 

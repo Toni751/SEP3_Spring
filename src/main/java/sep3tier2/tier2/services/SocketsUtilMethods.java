@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import sep3tier2.tier2.models.*;
+import sep3tier2.tier2.models.user.UserShortVersion;
 import sep3tier2.tier2.networking.ServerConnector;
 
 import java.lang.reflect.Type;

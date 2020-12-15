@@ -1,6 +1,10 @@
 package sep3tier2.tier2.services.post;
 
-import sep3tier2.tier2.models.*;
+import sep3tier2.tier2.models.post.Comment;
+import sep3tier2.tier2.models.post.CommentForPost;
+import sep3tier2.tier2.models.post.PostAction;
+import sep3tier2.tier2.models.post.PostShortVersion;
+import sep3tier2.tier2.models.user.UserShortVersion;
 
 import java.util.List;
 

@@ -6,8 +6,10 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import sep3tier2.tier2.models.*;
+import sep3tier2.tier2.models.chat.Message;
+import sep3tier2.tier2.models.chat.MessageWithSenderName;
+import sep3tier2.tier2.models.user.Notification;
 import sep3tier2.tier2.services.chat.ChatService;
-import sep3tier2.tier2.services.user.UserService;
 
 import java.util.List;
 

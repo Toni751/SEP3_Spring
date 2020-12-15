@@ -1,7 +1,6 @@
 package sep3tier2.tier2.services.admin;
 
-import sep3tier2.tier2.models.PostShortVersion;
-import sep3tier2.tier2.models.UserShortVersion;
+import sep3tier2.tier2.models.user.UserShortVersion;
 
 import java.util.List;
 

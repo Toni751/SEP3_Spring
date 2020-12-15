@@ -3,10 +3,8 @@ package sep3tier2.tier2.controllers.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.server.ResponseStatusException;
-import sep3tier2.tier2.models.PostShortVersion;
-import sep3tier2.tier2.models.UserShortVersion;
+import sep3tier2.tier2.models.user.UserShortVersion;
 import sep3tier2.tier2.services.admin.AdminService;
 
 import java.util.List;

@@ -2,8 +2,7 @@ package sep3tier2.tier2.services.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sep3tier2.tier2.models.PostShortVersion;
-import sep3tier2.tier2.models.UserShortVersion;
+import sep3tier2.tier2.models.user.UserShortVersion;
 import sep3tier2.tier2.networking.admin.SocketAdmin;
 
 import java.util.List;

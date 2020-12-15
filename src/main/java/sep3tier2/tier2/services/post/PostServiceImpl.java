@@ -2,7 +2,11 @@ package sep3tier2.tier2.services.post;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sep3tier2.tier2.models.*;
+import sep3tier2.tier2.models.post.Comment;
+import sep3tier2.tier2.models.post.CommentForPost;
+import sep3tier2.tier2.models.post.PostAction;
+import sep3tier2.tier2.models.post.PostShortVersion;
+import sep3tier2.tier2.models.user.UserShortVersion;
 import sep3tier2.tier2.networking.post.SocketPost;
 
 import java.util.List;

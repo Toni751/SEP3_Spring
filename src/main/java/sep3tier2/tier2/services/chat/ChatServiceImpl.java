@@ -2,8 +2,8 @@ package sep3tier2.tier2.services.chat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sep3tier2.tier2.models.Message;
-import sep3tier2.tier2.models.UserShortVersionWithMessage;
+import sep3tier2.tier2.models.chat.Message;
+import sep3tier2.tier2.models.user.UserShortVersionWithMessage;
 import sep3tier2.tier2.networking.chat.SocketChat;
 
 import java.util.List;

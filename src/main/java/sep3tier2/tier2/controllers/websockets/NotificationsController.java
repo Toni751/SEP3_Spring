@@ -3,13 +3,11 @@ package sep3tier2.tier2.controllers.websockets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
-import sep3tier2.tier2.models.Notification;
-import sep3tier2.tier2.models.UserAction;
-import sep3tier2.tier2.models.UserShortVersion;
+import sep3tier2.tier2.models.user.Notification;
+import sep3tier2.tier2.models.user.UserAction;
+import sep3tier2.tier2.models.user.UserShortVersion;
 import sep3tier2.tier2.services.user.UserService;
 import java.util.List;
 

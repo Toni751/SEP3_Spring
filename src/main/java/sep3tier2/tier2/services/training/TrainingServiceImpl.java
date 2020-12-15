@@ -2,7 +2,7 @@ package sep3tier2.tier2.services.training;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sep3tier2.tier2.models.*;
+import sep3tier2.tier2.models.training.*;
 import sep3tier2.tier2.networking.training.SocketTraining;
 
 import java.util.List;

@@ -2,7 +2,7 @@ package sep3tier2.tier2.services.diet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sep3tier2.tier2.models.*;
+import sep3tier2.tier2.models.diet.*;
 import sep3tier2.tier2.networking.diet.SocketDiet;
 
 import java.util.List;
