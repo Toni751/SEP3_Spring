@@ -1,4 +1,4 @@
-package sep3tier2.tier2.services;
+package sep3tier2.tier2.networking;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -74,9 +74,8 @@ public class SocketsUtilMethods
         if (requestResponse == null || requestResponse.getRequest() == null)
             return -1;
 
-        Integer integer = gson.fromJson(requestResponse.getRequest().getArgument().toString(), Integer.class);
-        System.out.println("Integer request result is " + integer);
-        return integer;
+        Integer modelId = gson.fromJson(requestResponse.getRequest().getArgument().toString(), Integer.class);
+        return modelId;
     }
 
     /**

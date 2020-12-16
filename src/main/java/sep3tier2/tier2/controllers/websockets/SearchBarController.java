@@ -31,12 +31,10 @@ public class SearchBarController
     @MessageMapping("/filter")
     public void sendNotification(@Payload FilterUsersRequest request)
     {
-        System.out.println("Filter string is " + request.getQueryString());
         try {
             List<SearchBarUser> searchBarUsers = userService.getUsersByFilter(request.getQueryString());
             messagingTemplate.convertAndSend("/topic/filter_result/" + request.getSenderId(), searchBarUsers);
         } catch (Exception e) {
-            System.out.println("Sending error message to clients");
             messagingTemplate.convertAndSend("/topic/errors/" + request.getSenderId(), e.getMessage());
         }
     }

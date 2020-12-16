@@ -21,13 +21,6 @@ import java.util.List;
 @Controller
 public class ChatController
 {
-//    DONE: List of online friends
-//    DONE: WebSocketsNotification for incoming message
-//    DONE: Create message, Delete (sets the content to null), Picture
-//    DONE: GetLastMessageWithUsers(with offset)
-//    DONE: GetLatestMessagesWithFriend(friendId, offset)
-
-    // DONE: something for user logout and something about new message notifications (in db)
     @Autowired
     private ChatService chatService;
 
@@ -41,10 +34,8 @@ public class ChatController
     @MessageMapping("/chat")
     public void sendMessage(@Payload MessageWithSenderName message)
     {
-        System.out.println("Got message " + message.getContent());
         try {
             Message temp = new Message(message.getSenderId(), message.getReceiverId(), message.getContent(), message.getTimeStamp(), message.hasImage(), message.getPicture());
-
 
             List<Integer> ints = chatService.addMessage(temp);
             message.setId(ints.get(0));
@@ -59,7 +50,6 @@ public class ChatController
             message.clearPicture();
             messagingTemplate.convertAndSend("/topic/chat/" + message.getSenderId(), message);
         } catch (Exception e) {
-            System.out.println("Sending error message to clients");
             messagingTemplate.convertAndSend("/topic/errors/" + message.getSenderId(), e.getMessage());
             messagingTemplate.convertAndSend("/topic/errors/" + message.getReceiverId(), e.getMessage());
         }
@@ -72,7 +62,6 @@ public class ChatController
     @MessageMapping("/delete_message")
     public void deleteMessage(@Payload Message message)
     {
-        System.out.println("Deleting message with id " + message.getId());
         try {
             chatService.deleteMessage(message.getId());
             message.setContent(null);
@@ -80,7 +69,6 @@ public class ChatController
             messagingTemplate.convertAndSend("/topic/chat/delete" + message.getReceiverId(), message);
             messagingTemplate.convertAndSend("/topic/chat/delete" + message.getSenderId(), message);
         } catch (Exception e) {
-            System.out.println("Sending error message to clients");
             messagingTemplate.convertAndSend("/topic/errors/" + message.getSenderId(), e.getMessage());
             messagingTemplate.convertAndSend("/topic/errors/" + message.getReceiverId(), e.getMessage());
         }

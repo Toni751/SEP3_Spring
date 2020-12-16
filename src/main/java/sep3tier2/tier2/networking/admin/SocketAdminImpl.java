@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import sep3tier2.tier2.models.*;
 import sep3tier2.tier2.models.user.UserShortVersion;
 import sep3tier2.tier2.networking.ServerConnectorImpl;
-import sep3tier2.tier2.services.SocketsUtilMethods;
+import sep3tier2.tier2.networking.SocketsUtilMethods;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

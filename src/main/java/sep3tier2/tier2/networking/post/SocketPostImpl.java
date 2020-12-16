@@ -11,7 +11,7 @@ import sep3tier2.tier2.models.post.PostAction;
 import sep3tier2.tier2.models.post.PostShortVersion;
 import sep3tier2.tier2.models.user.UserShortVersion;
 import sep3tier2.tier2.networking.ServerConnector;
-import sep3tier2.tier2.services.SocketsUtilMethods;
+import sep3tier2.tier2.networking.SocketsUtilMethods;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

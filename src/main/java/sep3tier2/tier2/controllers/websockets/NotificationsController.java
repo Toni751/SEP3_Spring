@@ -38,7 +38,6 @@ public class NotificationsController
             notification.setValue((boolean)userAction.getValue());
             messagingTemplate.convertAndSend("/topic/notifications/" + userAction.getReceiverId(), notification);
         } catch (Exception e) {
-            System.out.println("Sending error message to clients");
            messagingTemplate.convertAndSend("/topic/errors/" + userAction.getSenderId(), userAction.getActionType() + "_ERROR");
            messagingTemplate.convertAndSend("/topic/errors/" + userAction.getReceiverId(), userAction.getActionType() + "_ERROR");
         }
@@ -55,7 +54,6 @@ public class NotificationsController
             List<Integer> onlineFriendIds = userService.userLogInOrOut(userId, true);
             if(onlineFriendIds != null && onlineFriendIds.size() > 0)
                 for (Integer onlineFriendId : onlineFriendIds) {
-                    System.out.println("Ws sending logout notification to user " + onlineFriendId);
                     messagingTemplate.convertAndSend("/topic/new_offline/" + onlineFriendId, userId);
                 }
         } catch (Exception e) {
@@ -76,7 +74,6 @@ public class NotificationsController
             UserShortVersion user = userService.getUserShortVersionById(userId);
             if(onlineFriendIds != null && onlineFriendIds.size() > 0)
                 for (Integer onlineFriendId : onlineFriendIds) {
-                    System.out.println("Ws sending login notification to user " + onlineFriendId);
                     messagingTemplate.convertAndSend("/topic/new_online/" + onlineFriendId, user);
                 }
         } catch (Exception e) {

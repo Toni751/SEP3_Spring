@@ -28,11 +28,9 @@ public class UsersController {
     @CrossOrigin(origins = "*")
     @PostMapping
     public HttpStatus addUser(@RequestBody User user) {
-        System.out.println("Controller adding user");
         boolean response = userService.addUser(user);
         if (!response)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User could not be added");
-        System.out.println("Returning successful");
         return HttpStatus.CREATED;
     }
 
@@ -47,9 +45,6 @@ public class UsersController {
     public @ResponseBody
     UserShortVersion loginUser(@RequestParam("email") String email, @RequestParam("password") String password)
     {
-        System.out.println(this.hashCode());
-        System.out.println(this.toString());
-        System.out.println("Controller login user called with " + email + " " + password);
         UserShortVersion user = userService.login(email, password);
         if (user == null)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid credentials");
@@ -65,7 +60,6 @@ public class UsersController {
     @CrossOrigin(origins = "*")
     @PutMapping("/{id}")
     public HttpStatus editUser(@PathVariable int id, @RequestBody User user) {
-        System.out.println("Controller editing user " + id);
         try {
             userService.editUser(user);
             return HttpStatus.OK;
@@ -82,7 +76,6 @@ public class UsersController {
     @CrossOrigin(origins = "*")
     @DeleteMapping("/{id}")
     public HttpStatus deleteUser(@PathVariable int id) {
-        System.out.println("Controller deleting user " + id);
         try {
             userService.deleteUser(id);
             return HttpStatus.OK;
@@ -101,7 +94,6 @@ public class UsersController {
     @GetMapping()
     public @ResponseBody
     User getUserById(@RequestParam("senderId") int senderId, @RequestParam("receiverId") int receiverId) {
-        System.out.println("Controller get user " + receiverId + " by " + senderId);
         return userService.getUserById(senderId, receiverId);
     }
 
@@ -113,7 +105,6 @@ public class UsersController {
     @CrossOrigin(origins = "*")
     @GetMapping("/{id}/short")
     public @ResponseBody UserShortVersion getUserShortVersionById(@PathVariable int id) {
-        System.out.println("Controller getting user short version by id " + id);
         try {
             return userService.getUserShortVersionById(id);
         } catch (Exception e) {
@@ -129,7 +120,6 @@ public class UsersController {
     @CrossOrigin(origins = "*")
     @PostMapping("/actions")
     public HttpStatus postUserAction(@RequestBody UserAction userAction) {
-        System.out.println("Controller user action " + userAction.getActionType() + " with value " + userAction.getValue());
         try {
             userService.postUserAction(userAction);
             return HttpStatus.OK;
@@ -149,7 +139,6 @@ public class UsersController {
     @GetMapping("{id}/friends")
     public List<UserShortVersionWithStatus> getFriendListForUser(@PathVariable int id,
                                                                  @RequestParam("senderId") int senderId, @RequestParam("offset") int offset) {
-        System.out.println("Controller get friend list for user " + id + " by user " + senderId + " with offset " + offset);
         try {
             return userService.getFriendListForUser(id, senderId, offset);
         } catch (Exception e) {
@@ -165,7 +154,6 @@ public class UsersController {
     @CrossOrigin(origins = "*")
     @DeleteMapping("/notifications/{id}")
     public HttpStatus markNotificationAsRead(@PathVariable int id) {
-        System.out.println("Controller deleting notification " + id);
         try {
             userService.deleteNotification(id);
             return HttpStatus.OK;
@@ -182,7 +170,6 @@ public class UsersController {
     @CrossOrigin(origins = "*")
     @GetMapping("/pages")
     public List<UserShortVersion> getGymsInCity(@RequestParam("city") String city) {
-        System.out.println("Controller getting gyms in city " + city);
         try {
             return userService.getGymsByCity(city);
         } catch (Exception e) {
@@ -198,7 +185,6 @@ public class UsersController {
     @CrossOrigin(origins = "*")
     @GetMapping("/{id}/notifications")
     public List<Notification> getNotificationsForUser(@PathVariable int id) {
-        System.out.println("Controller getting notifications for user " + id);
         try {
             return userService.getNotificationsForUser(id);
         } catch (Exception e) {
@@ -216,7 +202,6 @@ public class UsersController {
     @PutMapping("/{id}/score")
     public HttpStatus incrementUserScoreByAmount(@PathVariable int id, @RequestParam("scoreToAdd") int scoreToAdd)
     {
-        System.out.println("Controller incrementing user " + id + " score by amount " + scoreToAdd);
         try {
             userService.incrementUserScore(id, scoreToAdd);
             return HttpStatus.OK;
@@ -233,7 +218,6 @@ public class UsersController {
     @CrossOrigin(origins = "*")
     @GetMapping("{id}/online_friends")
     public List<UserShortVersion> getOnlineFriendsForUser(@PathVariable int id) {
-        System.out.println("Controller get online friends list for user " + id);
         try {
             return userService.getOnlineFriendsForUser(id);
         } catch (Exception e) {

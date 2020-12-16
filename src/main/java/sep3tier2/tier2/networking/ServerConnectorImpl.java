@@ -33,7 +33,6 @@ public class ServerConnectorImpl implements ServerConnector
             List<byte[]> images = actualRequest.getImages();
 
             if (images != null && !images.isEmpty()) {
-                System.out.println("There are " + images.size() + " images to be sent");
                 List<Integer> imageSizes = new ArrayList<>();
                 for (byte[] image : images) {
                     imageSizes.add(image.length);
@@ -41,7 +40,6 @@ public class ServerConnectorImpl implements ServerConnector
 
                 Request informAboutImagesRequest = new Request(ActionType.HAS_IMAGES, imageSizes);
                 String informAboutImagesAsJson = gson.toJson(informAboutImagesRequest);
-
                 outputStream.write(informAboutImagesAsJson.getBytes());
 
                 String confirmationAboutImages = readFromStream(inputStream);
@@ -51,7 +49,6 @@ public class ServerConnectorImpl implements ServerConnector
                 }
             }
             String requestAsJson = gson.toJson(request);
-
             outputStream.write(requestAsJson.getBytes());
 
             String received = readFromStream(inputStream);
@@ -63,17 +60,14 @@ public class ServerConnectorImpl implements ServerConnector
                 for (Double sizesAsDouble : incomingImageSizesAsDoubles) {
                     incomingImageSizes.add(sizesAsDouble.intValue());
                 }
-                System.out.println("Going to receive " + incomingImageSizes.size() + " images");
                 List<byte[]> incomingImages = new ArrayList<>();
                 byte[] temp;
                 for (Integer incomingImageSize : incomingImageSizes) {
                     temp = inputStream.readNBytes(incomingImageSize);
-                    System.out.println("Read image with length " + temp.length);
                     incomingImages.add(temp);
                 }
 
                 String receivedRequestResponse = readFromStream(inputStream);
-                System.out.println("Received " + receivedRequestResponse + " " + receivedRequestResponse.length());
                 Request requestResponse = gson.fromJson(receivedRequestResponse, Request.class);
                 return new ActualRequest(requestResponse, incomingImages);
             } else
@@ -95,7 +89,6 @@ public class ServerConnectorImpl implements ServerConnector
         byte[] readBytes = new byte[65535];
         int readResultLength = inputStream.read(readBytes);
         String received = new String(readBytes, 0, readResultLength);
-        System.out.println("Received " + received + " " + received.length());
         return received;
     }
 }
